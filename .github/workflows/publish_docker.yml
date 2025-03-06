@@ -1,0 +1,4 @@
+name:
+  Publish Docker Image
+on:
+  workflow_dispatch:
