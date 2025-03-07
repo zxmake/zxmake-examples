@@ -22,12 +22,12 @@ RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list \
 #     && update-alternatives --install /usr/bin/clang clang /usr/bin/clang-18 1 --slave /usr/bin/clang++ clang++ /usr/bin/clang++-18
 
 # install xmake
-ENV XMAKE_COMMIT_VERSION v3.0.5
-ENV XMAKE_ROOT y
-ENV XMAKE_STATS n
-ENV XMAKE_PROGRAM_DIR /usr/local/share/xmake
-ENV XMAKE_MAIN_REPO https://user:c91b0446f7a94ef081fd447205f7043e1715238690486@ezone.zelostech.com.cn/ezone/zelos/xmake-repo.git
-ENV XMAKE_BINARY_REPO https://user:c91b0446f7a94ef081fd447205f7043e1715238690486@ezone.zelostech.com.cn/ezone/zelos/build-artifacts.git
+ENV XMAKE_COMMIT_VERSION=v3.0.5
+ENV XMAKE_ROOT=y
+ENV XMAKE_STATS=n
+ENV XMAKE_PROGRAM_DIR=/usr/local/share/xmake
+ENV XMAKE_MAIN_REPO=https://user:c91b0446f7a94ef081fd447205f7043e1715238690486@ezone.zelostech.com.cn/ezone/zelos/xmake-repo.git
+ENV XMAKE_BINARY_REPO=https://user:c91b0446f7a94ef081fd447205f7043e1715238690486@ezone.zelostech.com.cn/ezone/zelos/build-artifacts.git
 
 RUN mkdir /software && cd /software \
     && git clone --recursive https://gitee.com/tomocat/xmake.git \

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 DOCKER_CONTAINER="zmake-examples-container"
 DOCKER_HOSTNAME="docker_dev"
 
@@ -125,7 +127,7 @@ function docker_build() {
   }
 
   docker exec ${DOCKER_CONTAINER} /bin/bash -c 'echo DOCKER_IMAGE: ${DOCKER_IMG}'
-  ok 'Docker environment has already been setted up, you can enter with cmd: "bash docker.sh run"'
+  ok 'Docker environment has already been setted up, you can enter with cmd: "bash scripts/docker.sh run"'
 }
 
 function docker_clear() {

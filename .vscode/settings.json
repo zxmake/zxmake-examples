@@ -3,7 +3,8 @@
         "aliyun",
         "dearmor",
         "NOPASSWD",
-        "resolv"
+        "resolv",
+        "zmake"
     ],
     "cSpell.enabledFileTypes": {
         "dockerfile": false
