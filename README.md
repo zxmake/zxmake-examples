@@ -22,15 +22,17 @@ bash scripts/docker.sh run
 # bash scripts/docker.sh clear --image
 ```
 
-## 代码提示
+## 插件
 
-需要 clangd 插件。
+### 1. 代码提示
+
+需要 clangd 和 clang-format 插件。
 
 ```bash
 # 生成 compile_commands.json
 xmake build --all
 ```
 
-# Bazel
+### 2. Bazel 语法提示
 
 需要安装 Bazel 插件。

@@ -55,4 +55,5 @@ ADD docker/buildifier-linux-amd64 /usr/local/bin/buildifier
 
 RUN apt-get install -y --fix-missing \
     clangd \
-    ccache
+    ccache \
+    clang-format

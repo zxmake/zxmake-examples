@@ -3,3 +3,5 @@
 /.cache
 /.clangd
 compile_commands.json
+/bazel-cross-build/bazel-*
+*MODULE.bazel.lock
