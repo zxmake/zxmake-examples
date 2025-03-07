@@ -45,6 +45,14 @@ RUN mkdir /software && cd /software \
 #     && cd / && rm -r software
 ADD docker/bazel-8.1.1-linux-x86_64 /usr/local/bin/bazel
 
-# RUN apt-get install -y --fix-missing \
-#     clangd \
-#     ccache
+# RUN mkdir /software && cd /software \
+#     && wget https://github.com/bazelbuild/buildtools/releases/download/6.0.1/buildifier-linux-amd64 \
+#     && chmod +x buildifier-linux-amd64 \
+#     && mv buildifier-linux-amd64 /usr/local/bin/buildifier \
+#     && buildifier --version \
+#     && cd / && rm -r software
+ADD docker/buildifier-linux-amd64 /usr/local/bin/buildifier
+
+RUN apt-get install -y --fix-missing \
+    clangd \
+    ccache

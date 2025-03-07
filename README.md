@@ -24,9 +24,13 @@ bash scripts/docker.sh run
 
 ## 代码提示
 
-> 需要 clangd 插件。
+需要 clangd 插件。
 
 ```bash
 # 生成 compile_commands.json
 xmake build --all
 ```
+
+# Bazel
+
+需要安装 Bazel 插件。
