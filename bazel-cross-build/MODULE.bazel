@@ -1,0 +1,16 @@
+"""
+This module provides examples for bazel corss building.
+
+Author: TOMOCAT
+Date: 2025-03-07
+"""
+module(
+    name = "bazel-cross-build",
+    version = "1.0.0",
+)
+
+# 注册工具链
+bazel_dep(name = "platforms", version = "0.0.10")
+register_toolchains(
+    "//toolchain:cc_toolchain_for_linux_aarch64"
+)

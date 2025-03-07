@@ -1,0 +1,2 @@
+# 添加 c++ 编译参数
+build --cxxopt="-std=c++17"
