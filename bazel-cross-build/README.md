@@ -19,3 +19,13 @@ echo "deb [arch=amd64 signed-by=/usr/share/keyrings/bazel-archive-keyring.gpg] h
 # 使用固定的版本
 sudo apt update && sudo apt install bazel-8.1.1
 ```
+
+## 相关命令
+
+```bash
+# 编译
+bazel build //main:hello-world
+
+# 运行
+bazel-bin/main/hello-world
+```
