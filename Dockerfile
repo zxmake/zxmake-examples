@@ -11,7 +11,6 @@ RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list \
     cmake \
     make \
     clang \
-    ccache \
     htop \
     wget \
     vim
@@ -39,4 +38,13 @@ RUN mkdir /software && cd /software \
     && cd / && rm -r software
 
 # RUN mkdir /software && cd /software \
-#     && wget https://github.com/bazelbuild/bazel/releases/download/8.1.1/bazel-8.1.1-linux-x86_64
+#     && wget https://github.com/bazelbuild/bazel/releases/download/8.1.1/bazel-8.1.1-linux-x86_64 \
+#     && chmod +x bazel-8.1.1-linux-x86_64 \
+#     && mv bazel-8.1.1-linux-x86_64 /usr/local/bin/bazel \
+#     && bazel --version \
+#     && cd / && rm -r software
+ADD docker/bazel-8.1.1-linux-x86_64 /usr/local/bin/bazel
+
+# RUN apt-get install -y --fix-missing \
+#     clangd \
+#     ccache
