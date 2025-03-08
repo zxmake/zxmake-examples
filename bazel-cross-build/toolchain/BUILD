@@ -2,13 +2,13 @@ load(":cc_toolchain_config.bzl", "cc_toolchain_config")
 
 package(default_visibility = ["//visibility:public"])
 
-cc_toolchain_config(name = "linux_x86_64_toolchain_config")
+cc_toolchain_config(name = "linux_aarch64_toolchain_config")
 filegroup(name = "empty")
 
 cc_toolchain(
-    name = "linux_x86_64_toolchain",
-    toolchain_identifier = "linux_x86_64-toolchain",
-    toolchain_config = ":linux_x86_64_toolchain_config",
+    name = "linux_aarch64_toolchain",
+    toolchain_identifier = "linux_aarch64-toolchain",
+    toolchain_config = ":linux_aarch64_toolchain_config",
     all_files = ":empty",
     compiler_files = ":empty",
     dwp_files = ":empty",
@@ -20,14 +20,14 @@ cc_toolchain(
 
 toolchain(
     name = "cc_toolchain_for_linux_aarch64",
-    toolchain = ":linux_x86_64_toolchain",
+    toolchain = ":linux_aarch64_toolchain",
     toolchain_type = "@bazel_tools//tools/cpp:toolchain_type",
     exec_compatible_with = [
-        "@platforms//cpu:x86_64",
+        "@platforms//cpu:aarch64",
         "@platforms//os:linux",
     ],
     target_compatible_with = [
-        "@platforms//cpu:x86_64",
+        "@platforms//cpu:aarch64",
         "@platforms//os:linux",
     ],
 )
