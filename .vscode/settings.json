@@ -3,6 +3,7 @@
         "aliyun",
         "bazelrc",
         "Bzlmod",
+        "cuda",
         "cxxopt",
         "dearmor",
         "gcov",
