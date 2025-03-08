@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM nvcr.io/nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
 
 # set up the environment
 RUN sed -i 's/archive.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list \
