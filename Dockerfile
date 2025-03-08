@@ -1,7 +1,7 @@
-FROM ubuntu:24.04
+FROM ubuntu:22.04
 
 # set up the environment
-RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list \
+RUN sed -i 's/archive.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list \
     && apt-get clean && apt-get update && apt-get install -y --fix-missing \
     build-essential \
     git \
@@ -58,4 +58,9 @@ RUN apt-get install -y --fix-missing \
     ccache \
     clang-format \
     file \
-    g++-aarch64-linux-gnu
+    g++-aarch64-linux-gnu \
+    qemu-user-static
+
+# 需要设置 QEMU_LD_PREFIX, 否则会报错:
+# qemu-aarch64-static: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+ENV QEMU_LD_PREFIX=/usr/aarch64-linux-gnu

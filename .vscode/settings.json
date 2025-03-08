@@ -2,9 +2,14 @@
     "cSpell.words": [
         "aliyun",
         "dearmor",
+        "gcov",
+        "lstdc",
+        "nodeps",
         "NOPASSWD",
         "resolv",
-        "zmake"
+        "xmake",
+        "zmake",
+        "zxmake"
     ],
     "cSpell.enabledFileTypes": {
         "dockerfile": false

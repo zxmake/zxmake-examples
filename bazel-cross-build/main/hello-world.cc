@@ -1,7 +1,8 @@
-#include "lib/hello-time.h"
-#include "main/hello-greet.h"
 #include <iostream>
 #include <string>
+
+#include "lib/hello-time.h"
+#include "main/hello-greet.h"
 
 int main(int argc, char** argv) {
   std::string who = "world";
