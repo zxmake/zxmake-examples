@@ -1,6 +1,9 @@
 {
     "cSpell.words": [
         "aliyun",
+        "bazelrc",
+        "Bzlmod",
+        "cxxopt",
         "dearmor",
         "gcov",
         "hdrs",

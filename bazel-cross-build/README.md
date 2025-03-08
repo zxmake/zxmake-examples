@@ -38,7 +38,7 @@ bazel-bin/main/hello-world
 ## 交叉编译
 
 ```bash
-bazel build //main:hello-world
+bazel build --platforms=//platforms:aarch64_linux //main:hello-world
 ```
 
 ## Bazel 使用技巧
