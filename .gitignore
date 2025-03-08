@@ -4,4 +4,5 @@
 /.clangd
 compile_commands.json
 /bazel-cross-build/bazel-*
+/bazel-cuda-target/bazel-*
 *MODULE.bazel.lock
