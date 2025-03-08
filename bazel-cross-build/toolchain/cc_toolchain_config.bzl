@@ -72,7 +72,7 @@ def _impl(ctx):
         # replace your system includedirs here
         cxx_builtin_include_directories = [
             "/usr/aarch64-linux-gnu/include",
-            "/usr/lib/gcc-cross/aarch64-linux-gnu/13/include",
+            "/usr/lib/gcc-cross/aarch64-linux-gnu/11/include",
         ],
         toolchain_identifier = "local",
         host_system_name = "local",

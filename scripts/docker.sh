@@ -44,7 +44,7 @@ function help_info() {
 }
 
 function docker_run() {
-  docker exec -it --user $(id -u):$(id -g) ${DOCKER_CONTAINER} /bin/bash
+  docker exec -it ${DOCKER_CONTAINER} /bin/bash
 }
 
 function docker_build() {
@@ -61,72 +61,21 @@ function docker_build() {
   fi
 
   info "Docker container ${DOCKER_CONTAINER} does not exist. Starting..."
-  local user_id=$(id -u)
-  local grp=$(id -g -n)
-  local grp_id=$(id -g)
-  local local_host=$(hostname)
-
-  local docker_home="/home/$USER"
-  if [ "$USER" == "root" ]; then
-    docker_home="/root"
-    error "Please don't run docker.sh with root account, it is really dangerous!"
-    exit -1
-  fi
-
-  if [ ! -f "$HOME/.bashrc" ]; then
-    touch $HOME/.bashrc
-  fi
 
   general_param="-it -d \
     --privileged \
     --restart always \
     --name ${DOCKER_CONTAINER} \
-    -e DISPLAY=${display} \
-    -e DOCKER_USER=root \
-    -e USER=${USER} \
-    -e DOCKER_USER_ID=${user_id} \
-    -e DOCKER_GRP=${grp} \
-    -e DOCKER_GRP_ID=${grp_id} \
-    -e DOCKER_IMG=${DOCKER_IMAGE} \
     -v ${PROJECT_BASE_DIR}:/${PROJECT_NAME} \
     -v ${HOME}/.gitconfig:${docker_home}/.gitconfig\
     -v ${HOME}/.ssh:${docker_home}/.ssh \
-    -v ${HOME}/.bashrc:${docker_home}/.bashrc \
     -w /${PROJECT_NAME}"
 
   info "Starting docker container \"${DOCKER_CONTAINER}\" ..."
-  if [ "$(uname)" == "Darwin" ] ;then
-    error "No support macOs now!"
-    exit -1
-  else
-    docker run ${general_param} \
-        -v /etc/passwd:/etc/passwd:ro \
-        -v /etc/shadow:/etc/shadow:ro \
-        -v /etc/group:/etc/group:ro \
-        -v /etc/localtime:/etc/localtime:ro \
-        -v /etc/resolv.conf:/etc/resolv.conf:ro \
-        --net host \
-        --add-host ${DOCKER_HOSTNAME}:127.0.0.1 \
-        --add-host ${local_host}:127.0.0.1 \
-        --hostname ${DOCKER_HOSTNAME} \
-        --user $(id -u) \
-        ${DOCKER_IMAGE} \
-        /bin/bash
-  fi
 
-  [ "${USER}" != "root" ] && {
-    info "add ${USER} in the container with ${HOME}"
-    [ "$(uname)" == "Darwin" ] && {
-      docker exec ${DOCKER_CONTAINER} bash -c "useradd $USER -m --home /home/$USER || echo $?"
-      docker exec ${DOCKER_CONTAINER} bash -c "echo '$USER ALL=NOPASSWD: ALL' >> /etc/sudoers"
-      docker exec ${DOCKER_CONTAINER} bash -c "chown -R $USER"
-    } || {
-      docker exec -u root ${DOCKER_CONTAINER} bash -c "echo '$USER ALL=NOPASSWD: ALL' >> /etc/sudoers"
-      docker exec -u root ${DOCKER_CONTAINER} bash -c "chown -R $USER:$USER ${docker_home} || true"
-    }
-  }
+  docker run ${general_param} ${DOCKER_IMAGE} /bin/bash
 
-  docker exec ${DOCKER_CONTAINER} /bin/bash -c 'echo DOCKER_IMAGE: ${DOCKER_IMG}'
+  docker exec ${DOCKER_CONTAINER} /bin/bash
   ok 'Docker environment has already been setted up, you can enter with cmd: "bash scripts/docker.sh run"'
 }
 

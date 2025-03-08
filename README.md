@@ -2,12 +2,12 @@
 
 ## Docker
 
-* ubuntu 24.04
+* ubuntu 22.04
 * bazel v8.1.1
 * xmake v3.0.5
-* cmake
-* clang
-* gcc
+* cmake 3.22.1
+* clang 14.0.6
+* gcc 9.5.0
 
 通过手动触发流水线推送到 docker hub。
 
@@ -36,3 +36,17 @@ xmake build --all
 ### 2. Bazel 语法提示
 
 需要安装 Bazel 插件。
+
+## 运行 arm 二进制
+
+```bash
+# apt-get install qemu-user-static
+
+cd bazel-cross-build/
+bazel build //main:hello-world
+
+# 需要设置 QEMU_LD_PREFIX, 否则会报错:
+# qemu-aarch64-static: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+# export QEMU_LD_PREFIX=/usr/aarch64-linux-gnu
+qemu-aarch64-static ./bazel-bin/main/hello-world
+```
