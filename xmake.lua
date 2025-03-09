@@ -1,4 +1,5 @@
 includes("bazel-cross-build/xmake.lua")
+includes("bazel-cuda-target/xmake.lua")
 
 add_rules("plugin.compile_commands.autoupdate", {outputdir = "."})
 add_rules("mode.debug", "mode.release")

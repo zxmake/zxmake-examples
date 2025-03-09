@@ -4,7 +4,7 @@ module(
     compatibility_level = 1,
 )
 
-bazel_dep(name = "rules_cuda", version = "0.2.3")
+bazel_dep(name = "rules_cuda", version = "0.2.5")
 
 # pick a specific version (this is optional an can be skipped)
 # archive_override(
@@ -14,9 +14,9 @@ bazel_dep(name = "rules_cuda", version = "0.2.3")
 #     strip_prefix = "rules_cuda-{git_commit_hash}",
 # )
 
-# cuda = use_extension("@rules_cuda//cuda:extensions.bzl", "toolchain")
-# cuda.toolkit(
-#     name = "local_cuda",
-#     toolkit_path = "",
-# )
-# use_repo(cuda, "local_cuda")
+cuda = use_extension("@rules_cuda//cuda:extensions.bzl", "toolchain")
+cuda.local_toolchain(
+    name = "local_cuda",
+    toolkit_path = "",
+)
+use_repo(cuda, "local_cuda")
