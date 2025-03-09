@@ -19,6 +19,8 @@
         "protoc",
         "resolv",
         "srcs",
+        "Werror",
+        "Wextra",
         "xmake",
         "xunit",
         "zmake",
