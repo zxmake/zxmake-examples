@@ -18,5 +18,5 @@ function ok() {
   (>&2 printf "[\e[32m\e[1m OK \e[0m] $*\n")
 }
 
-xmake f --yes --verbose --diagnosis -p cross --sdk=/usr --cuda=/usr/local/cuda --cross=aarch64-linux-gnu- --cu=/usr/local/cuda/bin/nvcc
+xmake f --yes --project_name=xmake/g++-aarch64-linux-gnu --verbose --diagnosis -p cross --sdk=/usr --cuda=/usr/local/cuda --cross=aarch64-linux-gnu- --cu=/usr/local/cuda/bin/nvcc
 xmake b --yes --verbose --diagnosis --rebuild g++-aarch64-linux-gnu
