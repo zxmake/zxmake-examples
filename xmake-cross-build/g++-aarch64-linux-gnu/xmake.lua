@@ -7,6 +7,8 @@ add_requires("protobuf-cpp~host 3.19.4", {host = true, alias = "protoc"})
 -- 编译出 cross 版本的 protobuf 库, 用于构造交叉编译成品库
 add_requires("protobuf-cpp 3.19.4")
 
+add_cxxflags("-Wno-error=unused-parameter")
+
 target("pb", function()
     set_kind("object")
     add_files("pb/*.proto", { proto_public = true})
@@ -16,7 +18,7 @@ target("pb", function()
     set_policy('build.fence', true)
 end)
 
-target("aarch64-none-linux-gnu-cross", function()
+target("g++-aarch64-linux-gnu", function()
     set_kind("binary")
     add_files("src/*.cc")
     add_deps("pb")
