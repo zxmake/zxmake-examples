@@ -4,7 +4,7 @@
 
 * **bazel-cross-build**：Cross-compilation implemented with a custom toolchain.
 * **bazel-cross-build2**：ARM cross-compilation using the packaged [toolchain](https://github.com/hexdae/toolchains_arm_gnu)
-* **bazel-cross-build3**: 使用 [zig toolchain](https://github.com/uber/hermetic_cc_toolchain) 实现的 arm 交叉编译
+* **bazel-cross-build3**: Implemented ARM cross-compilation using the [zig toolchain](https://github.com/uber/hermetic_cc_toolchain)
 
 ## Docker
 
