@@ -37,6 +37,11 @@ bazel-bin/main/hello-world
 
 ## 交叉编译
 
+> 旧机制通过设置 `--crosstool_top` 标志来选择工具链，我们使用 platforms 参数来指定目标平台。
+>
+> 相关的讨论如下：
+> <https://github.com/bazelbuild/bazel/issues/7260>
+
 ```bash
 bazel build --platforms=//platforms:aarch64_linux //main:hello-world
 ```

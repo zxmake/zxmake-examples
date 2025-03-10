@@ -82,7 +82,7 @@ rules_java_toolchains()
 
 * Bzlmod
 
-使用 Bzlmod 时，只要您的依赖项在 Bazel 中央注册库或自定义 Bazel 注册库中可用，您只需使用 bazel_dep 指令即可依赖于它。
+使用 Bzlmod 时，只要您的依赖项在 [Bazel 中央注册库](https://registry.bazel.build/?hl=zh-cn)或自定义 [Bazel 注册库](https://bazel.build/external/registry?hl=zh-cn)中可用，您只需使用 [`bazel_dep`](https://bazel.build/versions/8.1.0/rules/lib/globals/module?hl=zh-cn#bazel_dep) 指令即可依赖于它。
 
 ```bazel
 ## MODULE.bazel

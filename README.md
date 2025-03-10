@@ -1,5 +1,10 @@
 # zxmake-examples
 
+## Examples
+
+* **bazel-cross-build**：自定义 toolchain 实现的交叉编译
+* **bazel-cross-build2**：使用打包好的 [toolchain](https://github.com/hexdae/toolchains_arm_gnu) 实现的 arm 交叉编译
+
 ## Docker
 
 * ubuntu 22.04
