@@ -27,10 +27,10 @@ ENV XMAKE_ROOT=y
 ENV XMAKE_STATS=n
 ENV XMAKE_PROGRAM_DIR=/usr/local/share/xmake
 ENV XMAKE_MAIN_REPO=https://github.com/zxmake/zxmake-repo.git
-ENV XMAKE_BINARY_REPO=https://github.com/TOMO-CAT/xmake-build-artifacts.git
+ENV XMAKE_BINARY_REPO=https://github.com/zxmake/zxmake-build-artifacts.git
 
 RUN mkdir /software && cd /software \
-    && git clone --recursive https://gitee.com/tomocat/xmake.git \
+    && git clone --recursive https://github.com/TOMO-CAT/xmake.git \
     && cd xmake \
     && git checkout ${XMAKE_COMMIT_VERSION} \
     && bash scripts/install.sh \

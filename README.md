@@ -3,10 +3,9 @@
 ## Examples
 
 * **bazel-cross-build**:
-    * **custom-toolchain**: Cross-compilation implemented with a custom toolchain.
-    * **hermetic_cc_toolchain**: Implemented ARM cross-compilation using the [zig toolchain](https://github.com/uber/hermetic_cc_toolchain)
-    * **toolchains_arm_gnu**: ARM cross-compilation using the packaged [toolchain](https://github.com/hexdae/toolchains_arm_gnu)
-
+  * **custom-toolchain**: Cross-compilation implemented with a custom toolchain.
+  * **hermetic_cc_toolchain**: Implemented ARM cross-compilation using the [zig toolchain](https://github.com/uber/hermetic_cc_toolchain)
+  * **toolchains_arm_gnu**: ARM cross-compilation using the packaged [toolchain](https://github.com/hexdae/toolchains_arm_gnu)
 
 ## Docker
 
@@ -16,7 +15,6 @@
 * cmake 3.22.1
 * clang 14.0.6
 * gcc 9.5.0
-
 
 ```bash
 # Build the Docker container

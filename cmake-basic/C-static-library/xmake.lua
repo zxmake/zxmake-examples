@@ -1,0 +1,5 @@
+target("cmake-basic.C-static-library.main", function()
+    set_kind("binary")
+    add_files("src/*.cc")
+    add_includedirs("include")
+end)

@@ -62,13 +62,16 @@ function docker_build() {
 
   info "Docker container ${DOCKER_CONTAINER} does not exist. Starting..."
 
+  DOCKER_HOME="/home/$USER"
+  [ "$USER" == "root" ] && DOCKER_HOME="/root"
+
   general_param="-it -d \
     --privileged \
     --restart always \
     --name ${DOCKER_CONTAINER} \
     -v ${PROJECT_BASE_DIR}:/${PROJECT_NAME} \
-    -v ${HOME}/.gitconfig:${docker_home}/.gitconfig\
-    -v ${HOME}/.ssh:${docker_home}/.ssh \
+    -v ${HOME}/.gitconfig:${DOCKER_HOME}/.gitconfig\
+    -v ${HOME}/.ssh:${DOCKER_HOME}/.ssh \
     -w /${PROJECT_NAME}"
 
   info "Starting docker container \"${DOCKER_CONTAINER}\" ..."
