@@ -1,0 +1,5 @@
+target("cmake-basic.E-installing.main", function()
+    set_kind("binary")
+    add_files("src/*.cc")
+    add_includedirs("include")
+end)
