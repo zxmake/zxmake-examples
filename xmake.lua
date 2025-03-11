@@ -2,8 +2,7 @@ option("project_name", function()
     set_description("xmake project name")
 end)
 
-if get_config("project_name") == "bazel-cross-build/custom-toolchain" or
-    get_config("project_name") == "all" then
+if get_config("project_name") == "bazel-cross-build/custom-toolchain" then
     includes("bazel-cross-build/custom-toolchain/xmake.lua")
 end
 
@@ -11,12 +10,10 @@ if get_config("project_name") == "bazel-cuda-target" or
     get_config("project_name") == "all" then
     includes("bazel-cuda-target/xmake.lua")
 end
-if get_config("project_name") == "xmake-cross-build/g++-aarch64-linux-gnu" or
-    get_config("project_name") == "all" then
+if get_config("project_name") == "xmake-cross-build/g++-aarch64-linux-gnu" then
     includes("xmake-cross-build/g++-aarch64-linux-gnu/xmake.lua")
 end
-if get_config("project_name") == "xmake-cross-build/zig" or
-    get_config("project_name") == "all" then
+if get_config("project_name") == "xmake-cross-build/zig" then
     includes("xmake-cross-build/zig/xmake.lua")
 end
 
