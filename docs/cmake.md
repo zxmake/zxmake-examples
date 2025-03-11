@@ -117,6 +117,42 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
 endif()
 ```
 
+## 添加编译参数
+
+CMake 支持两种方式添加编译参数：
+
+* `target_compile_definitions()` 和 `target_compile_options()` 函数
+* `CMAKE_C_FLAGS` 和 `CMAKE_CXX_FLAGS` 函数
+
+### 1. 添加宏定义
+
+```bash
+# 相当于添加 -DEX3 定义
+# 如果目标是库, 并且选择了 PUBLIC 或 INTERFACE 作用域, 则改定义也将包含在链接该目标的任何可执行文件中
+target_compile_definitions(cmake_examples_compile_flags
+    PRIVATE EX3
+)
+```
+
+### 2. 设置默认 C++ flags
+
+`CMAKE_CXX_FLAGS` 的默认值为空或包含生成类型的相应标志。要设置其他默认编译标志，可以将以下内容添加到顶级 CMakeLists.txt 中：
+
+```cmake
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DEX2" CACHE STRING "Set C++ Compiler Flags" FORCE)
+```
+
+除此之外：
+
+* **CMAKE_C_FLAGS**: 设置 C 编译器 flags
+* **CMAKE_LINKER_FLAGS**： 设置链接器 flags
+
+也可以在命令行设置：
+
+```bash
+cmake .. -DCMAKE_CXX_FLAGS="-DEX3"
+```
+
 ## Make 命令细节
 
 ```bash
