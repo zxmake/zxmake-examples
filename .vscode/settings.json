@@ -12,6 +12,7 @@
         "cxxopt",
         "dearmor",
         "DNDEBUG",
+        "dpkg",
         "eabi",
         "endl",
         "fprintf",

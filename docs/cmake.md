@@ -153,6 +153,95 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DEX2" CACHE STRING "Set C++ Compiler F
 cmake .. -DCMAKE_CXX_FLAGS="-DEX3"
 ```
 
+## 引用三方库
+
+几乎所有成熟的项目都需要包含第三方库、头文件或程序。CMake 通过 `find_package()` 函数支持查找这些工具的路径。该函数会在 `CMAKE_MODULE_PATH` 中列出的文件夹中搜索格式为 `"FindXXX.cmake"` 的 CMake 模块。在 Linux 上，默认搜索路径包括 `/usr/share/cmake/Modules`。
+
+### 1. 查找包
+
+查找 Boost 的例子如下：
+
+```bash
+# Boost -> 库名
+# 1.46.1 -> 要查找的 Boost 最低版本
+# REQUIRED -> 表示此库是必需的, 找不到会失败
+# COMPONENTS -> 要查找的库的组件
+find_package(Boost 1.46.1 REQUIRED COMPONENTS filesystem system)
+```
+
+### 2. 导出的变量
+
+大多数包含的包会设置一个变量 XXX_FOUND，用于检查系统上是否有该包。
+
+在上面的例子中，变量为 Boost_FOUND：
+
+```cmake
+if(Boost_FOUND)
+    message ("boost found")
+    include_directories(${Boost_INCLUDE_DIRS})
+else()
+    message (FATAL_ERROR "Cannot find Boost")
+endif()
+```
+
+> 除此之外，`Boost_INCLUDE_DIRS` 变量用于表示头文件的路径。
+
+### 3. 别名 / 导入目标
+
+在 Boost 的情况下，所有目标都使用 `Boost::` 标识符导出，然后是子系统的名称。例如，您可以使用：
+
+* **Boost::boost**： 用于仅包含头文件的库
+* **Boost::system**： 用于 Boost 系统库
+* **Boost::filesystem**： 用于文件系统库
+
+与自己的目标一样，这些目标包括它们的依赖项，因此链接到 `Boost::filesystem` 会自动添加 `Boost::boost` 和 `Boost::system` 依赖项。
+
+要链接到导入的目标，可以使用以下命令：
+
+```cmake
+target_link_libraries(third_party_include
+    PRIVATE
+        Boost::filesystem
+)
+```
+
+### 4. 非导入目标
+
+虽然大多数现代库使用导入目标，但并非所有模块都已更新。在某些情况下，如果库未更新，您通常会找到以下变量：
+
+* **xxx_INCLUDE_DIRS**： 指向库包含目录的变量
+* **xxx_LIBRARY**： 指向库路径的变量
+
+然后，您可以将这些变量添加到 `target_include_directories` 和 `target_link_libraries` 中：
+
+```cmake
+# 包含 Boost 头文件
+target_include_directories(third_party_include
+    PRIVATE ${Boost_INCLUDE_DIRS}
+)
+
+# 链接 Boost 库
+target_link_libraries(third_party_include
+    PRIVATE
+        ${Boost_SYSTEM_LIBRARY}
+        ${Boost_FILESYSTEM_LIBRARY}
+)
+```
+
+## 切换工具链
+
+CMake 提供了选项来控制编译和链接代码的程序：
+
+* **CMAKE_C_COMPILER**: 编译 C 代码的程序
+* **CMAKE_CXX_COMPILER**: 编译 C++ 代码的程序
+* **CMAKE_LINKER**: 链接二进制文件的程序
+
+例子：
+
+```bash
+cmake .. -DCMAKE_C_COMPILER=clang-3.6 -DCMAKE_CXX_COMPILER=clang++-3.6
+```
+
 ## Make 命令细节
 
 ```bash
