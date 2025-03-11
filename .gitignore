@@ -1,4 +1,4 @@
-/build/
+build/
 /.xmake/
 /.cache/
 /.clangd/
