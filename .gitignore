@@ -8,3 +8,5 @@ compile_commands.json
 /bazel-cross-build/custom-toolchain/bazel-*
 /bazel-cross-build/toolchains_arm_gnu/bazel-*
 /bazel-cuda-target/bazel-*
+/docker/.ssh
+/docker/.gitconfig

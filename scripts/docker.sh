@@ -48,11 +48,14 @@ function docker_run() {
 }
 
 function docker_build() {
+  cp -v ${HOME}/.gitconfig ${PROJECT_BASE_DIR}/docker/.gitconfig
+  cp -rv ${HOME}/.ssh ${PROJECT_BASE_DIR}/docker/.ssh
+
   if docker images | awk '{print $1":"$2}' | grep -q ${DOCKER_IMAGE}; then
     info "Docker image ${DOCKER_IMAGE} already exists."
   else
     info "Docker image ${DOCKER_IMAGE} does not exist. Start building..."
-    docker build -t ${DOCKER_IMAGE} .
+    docker build --build-arg HOST_HOME=${HOME} -t ${DOCKER_IMAGE} .
   fi
 
   if docker ps -a | grep -q "${DOCKER_CONTAINER}"; then
@@ -62,16 +65,13 @@ function docker_build() {
 
   info "Docker container ${DOCKER_CONTAINER} does not exist. Starting..."
 
-  DOCKER_HOME="/home/$USER"
-  [ "$USER" == "root" ] && DOCKER_HOME="/root"
+  DOCKER_HOME="/root"
 
   general_param="-it -d \
     --privileged \
     --restart always \
     --name ${DOCKER_CONTAINER} \
     -v ${PROJECT_BASE_DIR}:/${PROJECT_NAME} \
-    -v ${HOME}/.gitconfig:${DOCKER_HOME}/.gitconfig\
-    -v ${HOME}/.ssh:${DOCKER_HOME}/.ssh \
     -w /${PROJECT_NAME}"
 
   info "Starting docker container \"${DOCKER_CONTAINER}\" ..."

@@ -78,3 +78,8 @@ RUN mkdir /software && cd /software \
     && mv zig-linux-$(uname -m)-${ZIG_VER}/ /opt/zig \
     && cd / && rm -r software
 ENV PATH=/opt/zig:$PATH
+
+COPY docker/.ssh /root/.ssh
+COPY docker/.gitconfig /root/.gitconfig
+
+RUN git config --global --add safe.directory '*'
