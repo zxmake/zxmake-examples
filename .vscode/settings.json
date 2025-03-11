@@ -11,6 +11,7 @@
         "cugencodes",
         "cxxopt",
         "dearmor",
+        "DNDEBUG",
         "eabi",
         "endl",
         "fprintf",

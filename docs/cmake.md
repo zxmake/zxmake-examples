@@ -88,6 +88,35 @@ make install DESTDIR=/tmp/stage
 sudo xargs rm < install_manifest.txt
 ```
 
+## 构建类型
+
+CMake 提供了多种内置的构建配置，用于编译项目。这些配置指定了代码的优化级别以及是否包含调试信息。以下是 CMake 支持的几种构建类型：
+
+* **​Release**：添加 `-O3 -DNDEBUG` 标志到编译器，用于最终用户的发布版本，优化代码以提高执行速度和效率，不保留调试信息或仅保留极少的调试信息。
+* **​Debug**：添加 `-g` 标志，用于调试。不优化代码，保留完整的调试信息，使得开发者可以进行调试，找出程序中的错误。
+* **​MinSizeRel**：添加 `-Os -DNDEBUG` 标志，用于生成尽可能小的可执行文件。优化代码以减少可执行文件的大小，不保留调试信息或仅保留极少的调试信息。
+* **​RelWithDebInfo**：添加 `-O2 -g -DNDEBUG` 标志，提供了一种中间方案，旨在结合 Release 的优化和 Debug 的调试信息。优化代码，同时保留足够的调试信息，便于调试优化后的代码。
+
+### 1. 通过命令行设置
+
+可以在运行 cmake 命令时通过 -DCMAKE_BUILD_TYPE 参数来设置构建类型。
+
+```bash
+cmake -DCMAKE_BUILD_TYPE=Release ..
+```
+
+### 2. 设置默认构建类型
+
+如果未指定构建类型，CMake 默认使用 Debug 构建类型。可以通过在顶层 CMakeLists.txt 文件中添加以下代码来设置默认构建类型：
+
+```cmake
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+  message("Setting build type to 'RelWithDebInfo' as none was specified.")
+  set(CMAKE_BUILD_TYPE RelWithDebInfo CACHE STRING "Choose the type of build." FORCE)
+  set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
+endif()
+```
+
 ## Make 命令细节
 
 ```bash
