@@ -3,7 +3,7 @@
 /.cache/
 /.clangd/
 compile_commands.json
-/bazel-cross-build/bazel-*
-/bazel-cross-build2/bazel-*
-/bazel-cuda-target/bazel-*
+bazel-bin
+bazel-out
+bazel-testlogs
 *MODULE.bazel.lock

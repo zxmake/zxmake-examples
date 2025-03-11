@@ -26,7 +26,7 @@ sudo apt update && sudo apt install bazel-8.1.1
 
 ```bash
 # 进入 bazel workspace
-cd bazel-cross-build/
+cd bazel-cross-build/custom-toolchain
 
 # 编译
 bazel build //main:hello-world
@@ -40,7 +40,7 @@ bazel-bin/main/hello-world
 > 旧机制通过设置 `--crosstool_top` 标志来选择工具链，我们使用 platforms 参数来指定目标平台。
 >
 > 相关的讨论如下：
-> <https://github.com/bazelbuild/bazel/issues/7260>
+> [https://github.com/bazelbuild/bazel/issues/7260](https://github.com/bazelbuild/bazel/issues/7260)
 
 ```bash
 bazel build --platforms=//platforms:aarch64_linux //main:hello-world

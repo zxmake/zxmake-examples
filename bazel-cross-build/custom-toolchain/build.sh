@@ -18,5 +18,6 @@ function ok() {
   (>&2 printf "[\e[32m\e[1m OK \e[0m] $*\n")
 }
 
-xmake f --yes --project_name=xmake-cross-build/g++-aarch64-linux-gnu --verbose --diagnosis -p cross --sdk=/usr --cross=aarch64-linux-gnu- 
-xmake b --yes --verbose --diagnosis --rebuild g++-aarch64-linux-gnu
+# to generate compile_commands.json
+xmake config --project_name=bazel-cross-build/custom-toolchain
+xmake build --verbose --diagnosis --rebuild bazel-cross-build.custom-toolchain.hello-world
