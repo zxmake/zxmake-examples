@@ -1,0 +1,5 @@
+#pragma once
+
+// version variable that will be substituted by cmake
+// This shows an example using the another variable type
+const char* path = "@CMAKE_SOURCE_DIR@";

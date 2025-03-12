@@ -384,6 +384,25 @@ target_link_libraries(subbinary
 
 这是由创建库时 `target_include_directories()` 命令中的范围控制的。在本示例中，因为 subbinary 可执行文件链接了 sublibrary1 和 sublibrary2 库，它会自动包含 `${sublibrary1_SOURCE_DIR}/include` 和 `${sublibrary2_SOURCE_DIR}/include` 文件夹，因为这些文件夹是以库的 PUBLIC 和 INTERFACE 范围导出的。
 
+## 配置文件
+
+要在文件中进行变量替换，可以使用 CMake 中的 configure_file() 函数。此函数的核心参数是源文件和目标文件。
+
+```cmake
+configure_file(ver.h.in ${PROJECT_BINARY_DIR}/ver.h)
+configure_file(path.h.in ${PROJECT_BINARY_DIR}/path.h @ONLY)
+```
+
+支持两种语法：
+
+```c++
+// ${} 语法
+const char* ver = "${cf_example_VERSION}";
+
+// @@ 语法
+const char* path = "@CMAKE_SOURCE_DIR@";
+```
+
 ## Make 命令细节
 
 ```bash
