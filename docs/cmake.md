@@ -304,6 +304,86 @@ else()
 endif()
 ```
 
+## 添加子目录
+
+CMakeLists.txt 文件可以通过 `add_subdirectory` 命令包含并调用包含 `CMakeLists.txt` 文件的子目录。
+
+```bash
+add_subdirectory(sublibrary1)
+add_subdirectory(sublibrary2)
+add_subdirectory(subbinary)
+```
+
+### 1. 引用一个 sub project 目录
+
+当我们用 `project()` 创建一个项目时，CMake 会自动创建一些和项目相关的变量，并且这些变量可以被其他 project 使用，例如：
+
+```cmake
+# 获取 sublibrary1 project 和 sublibrary2 project 的源码目录
+${sublibrary1_SOURCE_DIR}
+${sublibrary2_SOURCE_DIR}
+```
+
+CMake 创建的变量包括：
+
+|         变量         |                             信息                             |
+| :------------------: | :----------------------------------------------------------: |
+|    `PROJECT_NAME`    |              当前 `project()` 设置的项目名称。               |
+| `CMAKE_PROJECT_NAME` |    第一个由 `project()` 命令设置的项目名称，即顶层项目。     |
+| `PROJECT_SOURCE_DIR` |                      当前项目的源目录。                      |
+| `PROJECT_BINARY_DIR` |                     当前项目的构建目录。                     |
+|  `name_SOURCE_DIR`   | 名为 "name" 的项目的源目录。在本示例中，创建的源目录有 `sublibrary1_SOURCE_DIR`、`sublibrary2_SOURCE_DIR` 和 `subbinary_SOURCE_DIR`。 |
+|  `name_BINARY_DIR`   | 名为 "name" 的项目的构建目录。在本示例中，创建的构建目录有 `sublibrary1_BINARY_DIR`、`sublibrary2_BINARY_DIR` 和 `subbinary_BINARY_DIR`。 |
+
+### 2. 只有头文件的目录
+
+如果你有一个仅包含头文件的库，CMake 支持使用 INTERFACE 目标来创建没有任何构建输出的库。
+
+```cmake
+add_library(${PROJECT_NAME} INTERFACE)
+```
+
+在创建目标时，还可以使用 INTERFACE 范围为目标包含目录。INTERFACE 范围用于定义目标的要求，这些要求会被链接该目标的任何库使用，但不会在该目标本身的编译中使用。
+
+```cmake
+target_include_directories(${PROJECT_NAME}
+    INTERFACE
+        ${PROJECT_SOURCE_DIR}/include
+)
+```
+
+### 3. 引用 sub-project 中的库
+
+如果一个 sub-project 创建了一个库，其他 project 可以通过在 `target_link_libraries()` 命令中调用目标名称来引用该库。这意味着你不需要引用新库的完整路径，并且它会被作为依赖项添加。
+
+```cmake
+target_link_libraries(subbinary
+    PUBLIC
+        sublibrary1
+)
+```
+
+另外，你可以创建一个别名目标，这允许你在只读上下文中引用目标。
+
+```cmake
+add_library(sublibrary2)
+add_library(sub::lib2 ALIAS sublibrary2)
+```
+
+引用方式如下：
+
+```cmake
+target_link_libraries(subbinary
+    sub::lib2
+)
+```
+
+### 4. include 子项目中的目录
+
+在添加子项目的库时，无需在使用它们的二进制文件中添加项目的包含目录。
+
+这是由创建库时 `target_include_directories()` 命令中的范围控制的。在本示例中，因为 subbinary 可执行文件链接了 sublibrary1 和 sublibrary2 库，它会自动包含 `${sublibrary1_SOURCE_DIR}/include` 和 `${sublibrary2_SOURCE_DIR}/include` 文件夹，因为这些文件夹是以库的 PUBLIC 和 INTERFACE 范围导出的。
+
 ## Make 命令细节
 
 ```bash

@@ -1,0 +1,6 @@
+target("cmake.02-sub-projects.main", function()
+    set_kind("binary")
+    add_files("subbinary/main.cc")
+    add_files("sublibrary1/src/sublib1.cc")
+    add_includedirs("sublibrary1/include", "sublibrary2/include")
+end)

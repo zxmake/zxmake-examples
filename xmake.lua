@@ -12,7 +12,7 @@ if get_config("project_name") == "bazel-cuda-target" or
 end
 
 -- cmake projects
-includes("cmake-basic/**xmake.lua")
+includes("cmake/**xmake.lua")
 
 -- xmake projects
 if get_config("project_name") == "xmake-cross-build/g++-aarch64-linux-gnu" then
