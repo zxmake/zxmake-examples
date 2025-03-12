@@ -2,14 +2,14 @@
 
 ## 变量
 
-CMake语法指定了许多变量，这些变量可用于帮助在项目或源代码树中找到有用的目录。其中一些包括：
+CMake 语法指定了许多变量，这些变量可用于帮助在项目或源代码树中找到有用的目录。其中一些包括：
 
 |            变量            |                  信息                  |
 | :------------------------: | :------------------------------------: |
 |     `CMAKE_SOURCE_DIR`     |                根源目录                |
 | `CMAKE_CURRENT_SOURCE_DIR` | 如果使用子项目和目录，则为当前源目录。 |
-|    `PROJECT_SOURCE_DIR`    |        当前CMake项目的源目录。         |
-|     `CMAKE_BINARY_DIR`     |  运行cmake命令的根目录或顶级文件夹。   |
+|    `PROJECT_SOURCE_DIR`    |        当前 CMake 项目的源目录。         |
+|     `CMAKE_BINARY_DIR`     |  运行 cmake 命令的根目录或顶级文件夹。   |
 | `CMAKE_CURRENT_BINARY_DIR` |         您当前所在的构建目录。         |
 |    `PROJECT_BINARY_DIR`    |          当前项目的构建目录。          |
 
@@ -62,7 +62,7 @@ install (TARGETS cmake_examples_inst
 
 ```cmake
 # 此示例将默认安装位置设置为构建目录下的 install 子目录
-if( CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT )
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   message(STATUS "Setting default CMAKE_INSTALL_PREFIX path to ${CMAKE_BINARY_DIR}/install")
   set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/install" CACHE STRING "The path to use for make install" FORCE)
 endif()
@@ -111,7 +111,7 @@ cmake -DCMAKE_BUILD_TYPE=Release ..
 
 ```cmake
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
-  message("Setting build type to 'RelWithDebInfo' as none was specified.")
+  message("Setting build type to'RelWithDebInfo'as none was specified.")
   set(CMAKE_BUILD_TYPE RelWithDebInfo CACHE STRING "Choose the type of build." FORCE)
   set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
 endif()
@@ -240,6 +240,68 @@ CMake 提供了选项来控制编译和链接代码的程序：
 
 ```bash
 cmake .. -DCMAKE_C_COMPILER=clang-3.6 -DCMAKE_CXX_COMPILER=clang++-3.6
+```
+
+## 生成器
+
+### 1. 生成器类型
+
+CMake 生成器负责为底层构建系统编写输入文件（例如 Makefile）。运行 cmake --help 将显示可用的生成器。以当前 docker 的 cmake 3.22.1 为例：
+
+```bash
+$ cmake --help
+Generators
+
+The following generators are available on this platform (* marks default):
+  Green Hills MULTI            = Generates Green Hills MULTI files
+                                 (experimental, work-in-progress).
+* Unix Makefiles               = Generates standard UNIX makefiles.
+  Ninja                        = Generates build.ninja files.
+  Ninja Multi-Config           = Generates build-<Config>.ninja files.
+  Watcom WMake                 = Generates Watcom WMake makefiles.
+  CodeBlocks - Ninja           = Generates CodeBlocks project files.
+  CodeBlocks - Unix Makefiles  = Generates CodeBlocks project files.
+  CodeLite - Ninja             = Generates CodeLite project files.
+  CodeLite - Unix Makefiles    = Generates CodeLite project files.
+  Eclipse CDT4 - Ninja         = Generates Eclipse CDT 4.0 project files.
+  Eclipse CDT4 - Unix Makefiles= Generates Eclipse CDT 4.0 project files.
+  Kate - Ninja                 = Generates Kate project files.
+  Kate - Unix Makefiles        = Generates Kate project files.
+  Sublime Text 2 - Ninja       = Generates Sublime Text 2 project files.
+  Sublime Text 2 - Unix Makefiles
+                               = Generates Sublime Text 2 project files.
+```
+
+### 2. 调用生成器
+
+```bash
+cmake .. -G Ninja
+```
+
+完成上述操作后，CMake 将生成所需的 Ninja 构建文件，这些文件可以通过使用 ninja 命令运行：
+
+```bash
+$ ls
+build.ninja  CMakeCache.txt  CMakeFiles  cmake_install.cmake  rules.ninja
+```
+
+## 检查编译参数
+
+CMake支持尝试使用传递给函数CMAKE_CXX_COMPILER_FLAG的任何标志来编译程序。然后将结果存储在您传递的变量中。
+
+```cmake
+# 尝试用 -std=c++11 来编译程序, 将结果存储到 COMPILER_SUPPORTS_CXX11 中
+include(CheckCXXCompilerFlag)
+CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
+
+# 根据结果做条件编译
+if(COMPILER_SUPPORTS_CXX11)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+elseif(COMPILER_SUPPORTS_CXX0X)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+else()
+    message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
+endif()
 ```
 
 ## Make 命令细节

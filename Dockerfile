@@ -61,7 +61,8 @@ RUN apt-get install -y --fix-missing \
     g++-aarch64-linux-gnu \
     qemu-user-static \
     unzip \
-    libboost-all-dev
+    libboost-all-dev \
+    ninja-build
 
 # 需要设置 QEMU_LD_PREFIX, 否则会报错:
 # qemu-aarch64-static: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
