@@ -30,6 +30,7 @@
         "NOPASSWD",
         "nvcc",
         "protoc",
+        "requireconfs",
         "resolv",
         "rpath",
         "srcs",

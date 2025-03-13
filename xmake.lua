@@ -26,6 +26,9 @@ end
 if get_config("project_name") == "xmake-cross-build/clang-sysroot-target" then
     includes("xmake-cross-build/clang-sysroot-target/xmake.lua")
 end
+if get_config("project_name") == "xmake-cross-build/llvm-11" then
+    includes("xmake-cross-build/llvm-11/xmake.lua")
+end
 
 add_rules("plugin.compile_commands.autoupdate", {outputdir = "."})
 add_rules("mode.debug", "mode.release")
