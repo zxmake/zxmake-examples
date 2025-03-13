@@ -53,21 +53,6 @@ ADD docker/bazel-8.1.1-linux-x86_64 /usr/local/bin/bazel
 #     && cd / && rm -r software
 ADD docker/buildifier-linux-amd64 /usr/local/bin/buildifier
 
-RUN apt-get install -y --fix-missing \
-    clangd \
-    ccache \
-    clang-format \
-    file \
-    g++-aarch64-linux-gnu \
-    qemu-user-static \
-    unzip \
-    libboost-all-dev \
-    ninja-build \
-    python3-dev \
-    protobuf-compiler \
-    binutils-dev \
-    git-lfs
-
 # 需要设置 QEMU_LD_PREFIX, 否则会报错:
 # qemu-aarch64-static: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
 ENV QEMU_LD_PREFIX=/usr/aarch64-linux-gnu
@@ -84,6 +69,24 @@ RUN mkdir /software && cd /software \
     && mv zig-linux-$(uname -m)-${ZIG_VER}/ /opt/zig \
     && cd / && rm -r software
 ENV PATH=/opt/zig:$PATH
+
+RUN apt-get install -y --fix-missing \
+    clangd \
+    ccache \
+    clang-format \
+    file \
+    g++-aarch64-linux-gnu \
+    qemu-user-static \
+    unzip \
+    libboost-all-dev \
+    ninja-build \
+    python3-dev \
+    protobuf-compiler \
+    binutils-dev \
+    git-lfs \
+    python3-pip
+
+RUN pip3 install scan-build
 
 COPY docker/.ssh /root/.ssh
 COPY docker/.gitconfig /root/.gitconfig
