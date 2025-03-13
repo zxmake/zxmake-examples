@@ -1,4 +1,9 @@
+includes("toolchain.lua")
+
+add_rules("plugin.compile_commands.autoupdate", {outputdir = "."})
 add_rules("mode.debug", "mode.release")
+
+add_cxxflags("-Wall", "-Wextra", "-Werror")
 
 set_languages("c++17")
 

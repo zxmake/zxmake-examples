@@ -1,5 +1,7 @@
+add_rules("plugin.compile_commands.autoupdate", {outputdir = "."})
 add_rules("mode.debug", "mode.release")
 
+add_cxxflags("-Wall", "-Wextra", "-Werror")
 set_languages("c++17")
 
 -- 编译出 host 版本的 protoc, 用于生成 *.pb.h 和 *.pb.cc

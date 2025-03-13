@@ -20,6 +20,8 @@ function ok() {
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+cd "${SCRIPT_DIR}"
+
 SDK_ZIP_FILE="${SCRIPT_DIR}/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-linux-gnueabihf.tar.xz"
 SDK_DIR="${SCRIPT_DIR}/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-linux-gnueabihf"
 
@@ -30,5 +32,7 @@ else
 fi
 
 # --sdk 必须用绝对路径否则 xmake 会报错找不到 arm-none-linux-gnueabihf-g++ 等二进制
-xmake f --yes --verbose -p cross --sdk="${SDK_DIR}" --project_name=xmake/02-cross-build/arm-none-linux-gnueabihf
+xmake f --yes --verbose -p cross --sdk="${SDK_DIR}"
 xmake b --verbose --rebuild xmake.02-cross-build.arm-none-linux-gnueabihf.main
+
+cd -

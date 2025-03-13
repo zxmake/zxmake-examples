@@ -22,7 +22,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 cd "${SCRIPT_DIR}"
 
-xmake config --toolchain=zig --arch=arm64
-xmake build --verbose --diagnosis --rebuild xmake.02-cross-build.zig.main
+xmake config --yes --verbose
+xmake build --yes --verbose
 
 cd -
