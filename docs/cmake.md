@@ -405,7 +405,17 @@ const char* path = "@CMAKE_SOURCE_DIR@";
 
 ## Proto 文件编译
 
-## Make 命令细节
+具体例子见 [CMake protobuf target](https://github.com/zxmake/zxmake-examples/blob/main/cmake/03-code-generation/B-protobuf/CMakeLists.txt)。
+
+## 其他
+
+### 1. 如何生成 compile_commands.json
+
+```cmake
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+```
+
+### 2. 打印出详细编译命令
 
 ```bash
 # 清理产出
