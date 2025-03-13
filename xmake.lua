@@ -1,3 +1,5 @@
+includes("xmake-cross-build/clang-sysroot-target/toolchain.lua")
+
 option("project_name", function()
     set_description("xmake project name")
 end)
@@ -20,6 +22,9 @@ if get_config("project_name") == "xmake-cross-build/g++-aarch64-linux-gnu" then
 end
 if get_config("project_name") == "xmake-cross-build/zig" then
     includes("xmake-cross-build/zig/xmake.lua")
+end
+if get_config("project_name") == "xmake-cross-build/clang-sysroot-target" then
+    includes("xmake-cross-build/clang-sysroot-target/xmake.lua")
 end
 
 add_rules("plugin.compile_commands.autoupdate", {outputdir = "."})

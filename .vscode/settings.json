@@ -2,13 +2,16 @@
     "cSpell.words": [
         "aliyun",
         "archs",
+        "armv",
         "bazelrc",
         "buildifier",
         "Bzlmod",
         "cout",
+        "CPLUS",
         "cstdio",
         "cuda",
         "cugencodes",
+        "cxflags",
         "cxxopt",
         "dearmor",
         "DNDEBUG",
@@ -20,13 +23,17 @@
         "gnueabihf",
         "hdrs",
         "horanceliu",
+        "ldflags",
+        "linkdirs",
         "lstdc",
         "nodeps",
         "NOPASSWD",
         "nvcc",
         "protoc",
         "resolv",
+        "rpath",
         "srcs",
+        "stdc",
         "sysincludedirs",
         "syslinks",
         "Werror",
@@ -37,7 +44,8 @@
         "zxmake"
     ],
     "cSpell.enabledFileTypes": {
-        "dockerfile": false
+        "dockerfile": false,
+        "json": false
     },
     "editor.formatOnSave": true
 }
