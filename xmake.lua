@@ -1,7 +1,8 @@
-includes("xmake-cross-build/clang-sysroot-target/toolchain.lua")
+includes("xmake/02-cross-build/clang-sysroot-target/toolchain.lua")
 
 option("project_name", function()
     set_description("xmake project name")
+    set_default("common")
 end)
 
 -- bazel projects
@@ -14,20 +15,13 @@ if get_config("project_name") == "bazel-cuda-target" or
 end
 
 -- cmake projects
-includes("cmake/**xmake.lua")
+if get_config("project_name") == "common" then
+    includes("cmake/**xmake.lua")
+end
 
--- xmake projects
-if get_config("project_name") == "xmake-cross-build/g++-aarch64-linux-gnu" then
-    includes("xmake-cross-build/g++-aarch64-linux-gnu/xmake.lua")
-end
-if get_config("project_name") == "xmake-cross-build/zig" then
-    includes("xmake-cross-build/zig/xmake.lua")
-end
-if get_config("project_name") == "xmake-cross-build/clang-sysroot-target" then
-    includes("xmake-cross-build/clang-sysroot-target/xmake.lua")
-end
-if get_config("project_name") == "xmake-cross-build/llvm-11" then
-    includes("xmake-cross-build/llvm-11/xmake.lua")
+-- xmake projects, we need to enable them manually
+if get_config("project_name") then
+    includes(path.join(get_config("project_name"), "xmake.lua"))
 end
 
 add_rules("plugin.compile_commands.autoupdate", {outputdir = "."})

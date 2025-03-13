@@ -1,0 +1,5 @@
+target("xmake.01-basic.B-cuda-target.main", function()
+    set_kind("binary")
+    add_files("main.cc")
+    add_files("kernel.cu")
+end)

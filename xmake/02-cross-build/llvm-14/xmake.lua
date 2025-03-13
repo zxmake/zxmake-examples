@@ -1,0 +1,13 @@
+-- packages/2502/l/llvm/14.0.0/source/llvm/tools/gold/gold-plugin.cpp:38:10: fatal error: plugin-api.h: No such file or directory
+-- sudo apt install binutils-dev
+-- @see https://blog.51cto.com/u_13721254/6163639
+add_requires("llvm 14.0.0", {alias = "llvm-14"})
+
+-- 3.12.3 版本会一直报错安装不了
+add_requireconfs("**.python", {override = true, version = "3.11.8"})
+
+target("xmake.02-cross-build.llvm-14.main", function()
+    set_kind("binary")
+    add_files("src/main.cc")
+    set_toolchains("llvm@llvm-14")
+end)
