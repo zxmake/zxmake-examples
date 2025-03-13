@@ -18,5 +18,5 @@ function ok() {
   (>&2 printf "[\e[32m\e[1m OK \e[0m] $*\n")
 }
 
-xmake f --yes --project_name=xmake-cross-build/g++-aarch64-linux-gnu --verbose --diagnosis --arch=armv8-a -p cross --sdk=/usr --cross=aarch64-linux-gnu- 
-xmake b --yes --verbose --diagnosis --rebuild g++-aarch64-linux-gnu
+xmake config --toolchain=zig --arch=arm64 --project_name=xmake/02-cross-build/zig
+xmake build --verbose --diagnosis --rebuild xmake.02-cross-build.zig.main
