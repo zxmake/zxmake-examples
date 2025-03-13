@@ -1,7 +1,7 @@
 build/
-/.xmake/
-/.cache/
-/.clangd/
+.xmake/
+.cache/
+.clangd/
 compile_commands.json
 *MODULE.bazel.lock
 

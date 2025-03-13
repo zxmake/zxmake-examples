@@ -1,4 +1,7 @@
+add_rules("plugin.compile_commands.autoupdate", {outputdir = "."})
 add_rules("mode.debug", "mode.release")
+
+add_cxxflags("-Wall", "-Wextra", "-Werror")
 
 set_languages("c++17")
 
@@ -6,6 +9,11 @@ set_languages("c++17")
 add_requires("protobuf-cpp~host 3.19.4", {host = true, alias = "protoc"})
 -- 编译出 cross 版本的 protobuf 库, 用于构造交叉编译成品库
 add_requires("protobuf-cpp 3.19.4")
+
+-- 只是为了 compile_commands.json
+add_sysincludedirs(
+    "arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-linux-gnueabihf/arm-none-linux-gnueabihf/include/c++/13.3.1",
+    "arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-linux-gnueabihf/arm-none-linux-gnueabihf/libc/usr/include")
 
 target("xmake.02-cross-build.arm-none-linux-gnueabihf.pb", function()
     set_kind("object")

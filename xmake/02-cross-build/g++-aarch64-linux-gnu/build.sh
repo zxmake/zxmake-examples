@@ -18,5 +18,11 @@ function ok() {
   (>&2 printf "[\e[32m\e[1m OK \e[0m] $*\n")
 }
 
-xmake f --yes --project_name=xmake/02-cross-build/g++-aarch64-linux-gnu --verbose --diagnosis --arch=armv8-a -p cross --sdk=/usr --cross=aarch64-linux-gnu- 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+cd "${SCRIPT_DIR}"
+
+xmake f --yes --verbose --diagnosis --arch=armv8-a -p cross --sdk=/usr --cross=aarch64-linux-gnu- 
 xmake b --yes --verbose --diagnosis --rebuild xmake.02-cross-build.g++-aarch64-linux-gnu.main
+
+cd -
