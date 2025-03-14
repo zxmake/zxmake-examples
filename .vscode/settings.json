@@ -26,6 +26,7 @@
         "ldflags",
         "linkdirs",
         "lstdc",
+        "muslcc",
         "nodeps",
         "NOPASSWD",
         "nvcc",

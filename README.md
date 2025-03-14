@@ -17,11 +17,8 @@
 * gcc 9.5.0
 
 ```bash
-# Build the Docker container
-bash scripts/docker.sh build
-
-# Run the Docker container
-bash scripts/docker.sh run
+# Build and Run the Docker container
+make docker
 
 # Remove the Docker container and image
 # bash scripts/docker.sh clear --image
