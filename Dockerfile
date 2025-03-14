@@ -84,7 +84,8 @@ RUN apt-get install -y --fix-missing \
     protobuf-compiler \
     binutils-dev \
     git-lfs \
-    python3-pip
+    python3-pip \
+    cppcheck
 
 RUN pip3 install scan-build
 
