@@ -48,5 +48,5 @@
         "dockerfile": false,
         "json": false
     },
-    "editor.formatOnSave": true
+    "editor.formatOnSave": false
 }
