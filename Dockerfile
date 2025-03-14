@@ -85,9 +85,8 @@ RUN apt-get install -y --fix-missing \
     binutils-dev \
     git-lfs \
     python3-pip \
-    cppcheck
-
-RUN pip3 install scan-build
+    cppcheck \
+    clang-tools
 
 COPY docker/.ssh /root/.ssh
 COPY docker/.gitconfig /root/.gitconfig
