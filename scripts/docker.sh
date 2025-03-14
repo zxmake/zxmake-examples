@@ -44,18 +44,18 @@ function help_info() {
 }
 
 function docker_run() {
-  docker exec -it ${DOCKER_CONTAINER} /bin/bash
+  docker exec -it ${DOCKER_CONTAINER} /bin/bash -c "source /home/${USER}/.profile && /bin/bash"
 }
 
 function docker_build() {
-  cp -v ${HOME}/.gitconfig ${PROJECT_BASE_DIR}/docker/.gitconfig
-  cp -rv ${HOME}/.ssh ${PROJECT_BASE_DIR}/docker/.ssh
+  # cp -v ${HOME}/.gitconfig ${PROJECT_BASE_DIR}/docker/.gitconfig
+  # cp -rv ${HOME}/.ssh ${PROJECT_BASE_DIR}/docker/.ssh
 
   if docker images | awk '{print $1":"$2}' | grep -q ${DOCKER_IMAGE}; then
     info "Docker image ${DOCKER_IMAGE} already exists."
   else
     info "Docker image ${DOCKER_IMAGE} does not exist. Start building..."
-    docker build --build-arg HOST_HOME=${HOME} -t ${DOCKER_IMAGE} .
+    docker build --build-arg USER_NAME="${USER}" -t ${DOCKER_IMAGE} .
   fi
 
   if docker ps -a | grep -q "${DOCKER_CONTAINER}"; then
@@ -65,20 +65,48 @@ function docker_build() {
 
   info "Docker container ${DOCKER_CONTAINER} does not exist. Starting..."
 
-  DOCKER_HOME="/root"
+  USER_ID=$(id -u)
+  GRP=$(id -g -n)
+  GRP_ID=$(id -g)
+  LOCAL_HOST=$(hostname)
+  DOCKER_HOME="/home/$USER"
+  [ "$USER" == "root" ] && DOCKER_HOME="/root"
+
+  # 避免 --volume 挂载时文件不存在
+  [ ! -f "${HOME}/.gitconfig" ] && touch "${HOME}/.gitconfig"
+  [ ! -f "${HOME}/.profile" ] && touch "${HOME}/.profile"
+  [ ! -f "${HOME}/.bashrc" ] && touch "${HOME}/.bashrc"
+  [ ! -d "${HOME}/.ssh" ] && mkdir "${HOME}/.ssh"
 
   general_param="-it -d \
     --privileged \
     --restart always \
     --name ${DOCKER_CONTAINER} \
-    -v ${PROJECT_BASE_DIR}:/${PROJECT_NAME} \
-    -w /${PROJECT_NAME}"
+    --env DOCKER_USER=root \
+    --env USER=${USER} \
+    --env DOCKER_USER_ID=${USER_ID} \
+    --env DOCKER_GRP=${GRP} \
+    --env DOCKER_GRP_ID=${GRP_ID} \
+    --env DOCKER_IMG=${DOCKER_IMAGE} \
+    --volume ${PROJECT_BASE_DIR}:/${PROJECT_NAME} \
+    --volume ${HOME}/.gitconfig:${DOCKER_HOME}/.gitconfig \
+    --volume ${HOME}/.profile:${DOCKER_HOME}/.profile \
+    --volume ${HOME}/.bashrc:${DOCKER_HOME}/.bashrc \
+    --volume ${HOME}/.ssh:${DOCKER_HOME}/.ssh \
+    --volume /etc/passwd:/etc/passwd:ro \
+    --volume /etc/group:/etc/group:ro \
+    --volume /etc/localtime:/etc/localtime:ro \
+    --volume /etc/resolv.conf:/etc/resolv.conf:ro \
+    --net host \
+    --add-host in_dev_docker:127.0.0.1 \
+    --add-host ${LOCAL_HOST}:127.0.0.1 \
+    --hostname in_dev_docker \
+    --workdir /${PROJECT_NAME}"
+
 
   info "Starting docker container \"${DOCKER_CONTAINER}\" ..."
 
   docker run ${general_param} ${DOCKER_IMAGE} /bin/bash
-
-  docker exec ${DOCKER_CONTAINER} /bin/bash
   ok 'Docker environment has already been setted up, you can enter with cmd: "bash scripts/docker.sh run"'
 }
 
@@ -108,6 +136,7 @@ function docker_clear() {
     info "Deleting docker image \"${DOCKER_IMAGE}\" ..."
     docker rmi ${DOCKER_IMAGE}
   fi
+  ok "Delete docker container [${DOCKER_CONTAINER}] successfully!"
 }
 
 function main() {

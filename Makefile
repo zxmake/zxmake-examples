@@ -1,5 +1,10 @@
-.PHONY: xmake
-xmake:
+.PHONY: docker
+docker:
+	bash scripts/docker.sh build
+	bash scripts/docker.sh run
+
+.PHONY: all
+all:
 	bash cmake/03-code-generation/B-protobuf/build_xmake.sh
 
 	bash xmake/01-basic/B-cuda-target/build.sh

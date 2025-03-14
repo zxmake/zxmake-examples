@@ -88,7 +88,14 @@ RUN apt-get install -y --fix-missing \
     cppcheck \
     clang-tools
 
-COPY docker/.ssh /root/.ssh
-COPY docker/.gitconfig /root/.gitconfig
+# docker 只能从当前目录获取文件, 不能从宿主机其他目录获取, 所以需要先拷贝到 docker/ 目录下
+# COPY docker/.ssh /root/.ssh
+# COPY docker/.gitconfig /root/.gitconfig
 
 RUN git config --global --add safe.directory '*'
+
+ARG USER_NAME=visitor
+RUN useradd -m ${USER_NAME}
+# 免密执行 sudo 权限
+RUN echo "${USER_NAME} ALL=NOPASSWD: ALL" >> /etc/sudoers
+USER ${USER_NAME}
