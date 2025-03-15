@@ -60,7 +60,8 @@
     "cSpell.enabledFileTypes": {
         "dockerfile": false,
         "json": false,
-        "yaml": false
+        "yaml": false,
+        "makefile": false
     },
     "editor.formatOnSave": false
 }
