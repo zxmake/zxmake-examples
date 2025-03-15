@@ -5,9 +5,11 @@
         "armv",
         "bazelrc",
         "buildifier",
+        "buildir",
         "Bzlmod",
         "cout",
         "CPLUS",
+        "cppccheck",
         "cppcheck",
         "cstdio",
         "cuda",
@@ -60,7 +62,8 @@
     "cSpell.enabledFileTypes": {
         "dockerfile": false,
         "json": false,
-        "yaml": false
+        "yaml": false,
+        "makefile": false
     },
     "editor.formatOnSave": false
 }

@@ -2,12 +2,15 @@
 
 set -e
 
-rm build -rf
-mkdir build
-cd build
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BUILD_DIR="${SCRIPT_DIR}/build"
+
+rm "${BUILD_DIR}" -rf
+mkdir "${BUILD_DIR}"
+cd "${BUILD_DIR}"
 cmake ..
 ls -l
-make VERBOSE =1
+make VERBOSE=1
+# ./protobuf_example test.db
 cd -
-
-# ./build/protobuf_example test.db
