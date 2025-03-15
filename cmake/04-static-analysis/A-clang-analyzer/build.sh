@@ -6,9 +6,6 @@ rm build -rf
 mkdir build
 cd build
 
-export CC=clang
-export CXX=clang++
-
 # https://stackoverflow.com/questions/68172416/scan-build-not-working-reporting-removing-directory-xxx-because-it-contains-no
 # sudo apt install clang-tools
 #

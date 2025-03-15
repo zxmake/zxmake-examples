@@ -8,12 +8,16 @@
         "Bzlmod",
         "cout",
         "CPLUS",
+        "cppcheck",
         "cstdio",
         "cuda",
+        "cudnn",
         "cugencodes",
         "cxflags",
         "cxxopt",
+        "DCPPCHECK",
         "dearmor",
+        "devel",
         "DNDEBUG",
         "dpkg",
         "eabi",
@@ -30,6 +34,7 @@
         "nodeps",
         "NOPASSWD",
         "nvcc",
+        "nvcr",
         "protoc",
         "requireconfs",
         "resolv",
@@ -47,7 +52,8 @@
     ],
     "cSpell.enabledFileTypes": {
         "dockerfile": false,
-        "json": false
+        "json": false,
+        "yaml": false
     },
     "editor.formatOnSave": false
 }

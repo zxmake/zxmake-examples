@@ -6,7 +6,7 @@ project(cppcheck_analysis)
 set(CMAKE_BUILD_TYPE Debug)
 
 # 生成 compile_commands.json
-# set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # 添加子项目
 add_subdirectory(subproject1)

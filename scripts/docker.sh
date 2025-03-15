@@ -74,8 +74,9 @@ function docker_build() {
 
   # 避免 --volume 挂载时文件不存在
   [ ! -f "${HOME}/.gitconfig" ] && touch "${HOME}/.gitconfig"
-  [ ! -f "${HOME}/.profile" ] && touch "${HOME}/.profile"
-  [ ! -f "${HOME}/.bashrc" ] && touch "${HOME}/.bashrc"
+  # 不挂载 ~/.profile 和 ~/.bashrc 了, 因为如果这里面定义了 CXX CPP CC 和 LD 环境变量会影响交叉编译
+  # [ ! -f "${HOME}/.profile" ] && touch "${HOME}/.profile"
+  # [ ! -f "${HOME}/.bashrc" ] && touch "${HOME}/.bashrc"
   [ ! -d "${HOME}/.ssh" ] && mkdir "${HOME}/.ssh"
 
   general_param="-it -d \
@@ -90,8 +91,6 @@ function docker_build() {
     --env DOCKER_IMG=${DOCKER_IMAGE} \
     --volume ${PROJECT_BASE_DIR}:/${PROJECT_NAME} \
     --volume ${HOME}/.gitconfig:${DOCKER_HOME}/.gitconfig \
-    --volume ${HOME}/.profile:${DOCKER_HOME}/.profile \
-    --volume ${HOME}/.bashrc:${DOCKER_HOME}/.bashrc \
     --volume ${HOME}/.ssh:${DOCKER_HOME}/.ssh \
     --volume /etc/passwd:/etc/passwd:ro \
     --volume /etc/group:/etc/group:ro \
