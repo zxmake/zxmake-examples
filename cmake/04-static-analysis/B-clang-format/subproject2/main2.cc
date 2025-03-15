@@ -1,13 +1,12 @@
 #include <iostream>
 
-class TestClass {
+class TestClass
+{
 public:
     TestClass();
 };
 
-TestClass::TestClass() {
-
-}
+TestClass::TestClass() {}
 
 int main(int argc, char* argv[])
 {
