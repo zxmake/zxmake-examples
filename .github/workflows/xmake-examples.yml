@@ -37,3 +37,7 @@ jobs:
           
       - name: Print Current Path
         run: pwd
+
+      - name: Run XMake Examples
+        run: |
+          bash scripts/run_xmake_examples.sh
