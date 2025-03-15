@@ -41,3 +41,4 @@ jobs:
       - name: Run XMake Examples
         run: |
           bash scripts/run_xmake_examples.sh
+          bash xmake/02-cross-build/aarch64-none-linux-gnu/build.sh
