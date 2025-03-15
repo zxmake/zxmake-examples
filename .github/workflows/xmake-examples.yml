@@ -18,8 +18,22 @@ jobs:
         run: |
           apt-get update
           apt-get install -y --fix-missing build-essential git git-lfs \
-            cmake make clang sudo
+            cmake make clang sudo curl wget ccache g++-aarch64-linux-gnu
+          
       - uses: actions/checkout@v4
         with:
           submodules: true
           lfs: true
+
+      - name: Install XMake
+        run: |
+          mkdir /software && cd /software
+          git clone --recursive https://github.com/TOMO-CAT/xmake.git
+          cd xmake
+          git checkout v3.0.5
+          bash scripts/install.sh
+          xmake --version
+          cd / && rm -r software
+          
+      - name: Print Current Path
+        run: pwd
