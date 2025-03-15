@@ -28,7 +28,7 @@ SDK_DIR="${SCRIPT_DIR}/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-linux-gnueabi
 if [ -d "${SDK_DIR}" ]; then
     warning "dir [${SDK_DIR}] exists, remove it"
 else
-    tar -xvf ${SDK_ZIP_FILE} -C "${SCRIPT_DIR}"
+    tar -xf ${SDK_ZIP_FILE} -C "${SCRIPT_DIR}"
 fi
 
 # --sdk 必须用绝对路径否则 xmake 会报错找不到 arm-none-linux-gnueabihf-g++ 等二进制
