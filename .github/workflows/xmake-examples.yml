@@ -11,9 +11,10 @@ jobs:
     steps:
       - name: Prepare Environment
         run: |
-          sudo apt-get update
-          sudo apt-get install -y --fix-missing build-essential git \
-            cmake make clang
-      # - uses: actions/checkout@v2
-      #   with:
-      #     submodules: true
+          apt-get update
+          apt-get install -y --fix-missing build-essential git \
+            cmake make clang sudo
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+          lfs: true
