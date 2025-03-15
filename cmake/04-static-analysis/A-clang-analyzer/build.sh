@@ -2,12 +2,13 @@
 
 set -e
 
-rm build -rf
-mkdir build
-cd build
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BUILD_DIR="${SCRIPT_DIR}/build"
+cd "${SCRIPT_DIR}"
 
-export CC=gcc
-export CXX=g++
+# rm "${BUILD_DIR}" -rf
+# mkdir "${BUILD_DIR}"
+# cd "${BUILD_DIR}"
 
 # https://stackoverflow.com/questions/68172416/scan-build-not-working-reporting-removing-directory-xxx-because-it-contains-no
 # sudo apt install clang-tools

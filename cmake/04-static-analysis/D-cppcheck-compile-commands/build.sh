@@ -2,8 +2,12 @@
 
 set -e
 
-mkdir -p build
-cd build
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BUILD_DIR="${SCRIPT_DIR}/build"
+rm "${BUILD_DIR}" -rf
+mkdir "${BUILD_DIR}"
+cd "${BUILD_DIR}"
+
 cmake -DCPPCHECK_ERROR_EXITCODE_ARG="" ..
 make cppcheck-analysis
 cd -

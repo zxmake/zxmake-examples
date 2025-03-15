@@ -10,6 +10,9 @@ set(SOURCES
     src/main.cc
 )
 
+# 生成 compile_commands.json
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # 根据前面定义的 SOURCES 创建二进制
 add_executable(hello_headers ${SOURCES})
 

@@ -4,14 +4,14 @@
 #  CPPCHECK_BIN, where to find cppcheck
 #
 # To help find the binary you can set CPPCHECK_ROOT_DIR to search a custom path
-# Exported argumets include
+# Exported arguments include
 #   CPPCHECK_FOUND, if false, do not try to link to cppcheck --- if (CPPCHECK_FOUND)
 #   
 #   CPPCHECK_THREADS_ARG - Number of threads to use (e.g. -j 3)
 #   CPPCHECK_PROJECT_ARG - The project to use (compile_comands.json)
 #   CPPCHECK_BUILD_DIR_ARG - The build output directory
 #   CPPCHECK_ERROR_EXITCODE_ARG - The exit code if an error is found
-#   CPPCHECK_SUPPRESSIONS - A suppressiosn file to use
+#   CPPCHECK_SUPPRESSIONS - A suppressions file to use
 #   CPPCHECK_CHECKS_ARGS - The checks to run
 #   CPPCHECK_OTHER_ARGS - Any other arguments
 #   CPPCHECK_COMMAND - The full command to run the default cppcheck configuration
