@@ -18,7 +18,8 @@ jobs:
         run: |
           apt-get update
           apt-get install -y --fix-missing build-essential git git-lfs \
-            cmake make clang sudo curl wget ccache g++-aarch64-linux-gnu
+            cmake make clang sudo curl wget ccache g++-aarch64-linux-gnu \
+            unzip
           
       - uses: actions/checkout@v4
         with:
@@ -30,7 +31,7 @@ jobs:
           mkdir /software && cd /software
           git clone --recursive https://github.com/TOMO-CAT/xmake.git
           cd xmake
-          git checkout v3.0.5
+          git checkout master
           bash scripts/install.sh
           xmake --version
           cd / && rm -r software
@@ -41,4 +42,3 @@ jobs:
       - name: Run XMake Examples
         run: |
           bash scripts/run_xmake_examples.sh
-          bash xmake/02-cross-build/aarch64-none-linux-gnu/build.sh
