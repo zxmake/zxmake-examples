@@ -32,7 +32,7 @@ else
 fi
 
 # --sdk 必须用绝对路径否则 xmake 会报错找不到 arm-none-linux-gnueabihf-g++ 等二进制
-xmake f --yes --verbose -p cross --sdk="${SDK_DIR}"
+xmake f --yes -p cross --sdk="${SDK_DIR}"
 xmake b --verbose --rebuild xmake.02-cross-build.arm-none-linux-gnueabihf.main
 
 cd -
