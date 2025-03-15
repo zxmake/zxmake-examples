@@ -22,7 +22,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 cd "${SCRIPT_DIR}"
 
-xmake f --yes --verbose --diagnosis --arch=armv8-a -p cross --sdk=/usr --cross=aarch64-linux-gnu- 
+xmake f --yes --arch=armv8-a -p cross --sdk=/usr --cross=aarch64-linux-gnu- 
 xmake b --yes --verbose --diagnosis --rebuild xmake.02-cross-build.g++-aarch64-linux-gnu.main
 
 cd -
