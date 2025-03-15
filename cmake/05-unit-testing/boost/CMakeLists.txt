@@ -3,10 +3,10 @@ cmake_minimum_required(VERSION 3.5)
 project (boost_unit_test)
 
 
-# find a boost install with the libraries unit_test_framework
+# 查找包含 unit_test_framework 的 Boost 1.46.1
 find_package(Boost 1.46.1 REQUIRED COMPONENTS unit_test_framework)
 
-# Add an library for the example classes
+# 创建测试用的 library
 add_library(example_boost_unit_test
     reverse.cc
     palindrome.cc
@@ -23,12 +23,12 @@ target_link_libraries(example_boost_unit_test
 )
 
 #############################################
-# Unit tests
+# 单元测试
 
-# enable CTest testing
+# 启用 CTest testing
 enable_testing()
 
-# Add a testing executable
+# 创建一个测试用的可执行程序
 add_executable(unit_tests unit_tests.cc)
 
 target_link_libraries(unit_tests
