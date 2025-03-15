@@ -86,7 +86,8 @@ RUN apt-get install -y --fix-missing \
     git-lfs \
     python3-pip \
     cppcheck \
-    clang-tools
+    clang-tools \
+    llvm
 
 # docker 只能从当前目录获取文件, 不能从宿主机其他目录获取, 所以需要先拷贝到 docker/ 目录下
 # COPY docker/.ssh /root/.ssh
