@@ -2,6 +2,12 @@ name:
   Publish Docker Image
 on:
   workflow_dispatch:
+  pull_request:
+  push:
+    branches: [ main ]
+  release:
+    types: [ published ]
+
 
   # 按 tag 推送时
   # push:
