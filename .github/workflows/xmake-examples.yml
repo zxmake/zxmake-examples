@@ -19,7 +19,7 @@ jobs:
           apt-get update
           apt-get install -y --fix-missing build-essential git git-lfs \
             cmake make clang sudo curl wget ccache g++-aarch64-linux-gnu \
-            unzip
+            unzip llvm protobuf-compiler
           
       - uses: actions/checkout@v4
         with:
@@ -34,8 +34,16 @@ jobs:
           git checkout master
           bash scripts/install.sh
           xmake --version
-          cd / && rm -r software
           
+      - name: Install Zig
+        env:
+          ZIG_VER: 0.14.0
+        run: |
+          mkdir /software && cd /software
+          curl https://ziglang.org/builds/zig-linux-$(uname -m)-${ZIG_VER}.tar.xz -o zig-linux.tar.xz
+          tar xf zig-linux.tar.xz
+          mv zig-linux-$(uname -m)-${ZIG_VER}/ /opt/zig
+
       - name: Print Current Path
         run: pwd
 
