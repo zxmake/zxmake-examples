@@ -54,10 +54,6 @@ package("protobuf-cpp", function()
                          (package:config("shared") and "ON" or "OFF"))
 
         local packagedeps = {}
-        if package:version():ge("22.0") then
-            table.insert(packagedeps, "abseil")
-            table.insert(configs, "-Dprotobuf_ABSL_PROVIDER=package")
-        end
 
         import("package.tools.cmake").install(package, configs, {
             buildir = "build",
