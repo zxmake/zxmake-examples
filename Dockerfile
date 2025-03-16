@@ -53,10 +53,6 @@ ADD docker/bazel-8.1.1-linux-x86_64 /usr/local/bin/bazel
 #     && cd / && rm -r software
 ADD docker/buildifier-linux-amd64 /usr/local/bin/buildifier
 
-# 需要设置 QEMU_LD_PREFIX, 否则会报错:
-# qemu-aarch64-static: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
-ENV QEMU_LD_PREFIX=/usr/aarch64-linux-gnu
-
 # install zig
 # https://github.com/ziglang/docker-zig
 # https://github.com/antonputra/tutorials/blob/main/lessons/208/http.zig/Dockerfile
@@ -88,6 +84,10 @@ RUN apt-get install -y --fix-missing \
     cppcheck \
     clang-tools \
     llvm
+
+# 需要设置 QEMU_LD_PREFIX, 否则会报错:
+# qemu-aarch64-static: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+ENV QEMU_LD_PREFIX=/usr/aarch64-linux-gnu
 
 # docker 只能从当前目录获取文件, 不能从宿主机其他目录获取, 所以需要先拷贝到 docker/ 目录下
 # COPY docker/.ssh /root/.ssh
