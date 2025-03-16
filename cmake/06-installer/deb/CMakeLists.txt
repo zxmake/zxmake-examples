@@ -2,9 +2,10 @@ cmake_minimum_required(VERSION 3.5)
 
 project(cmake_examples_deb)
 
+# 生成 compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# set a project version
+# 设置项目版本号
 set (deb_example_VERSION_MAJOR 0)
 set (deb_example_VERSION_MINOR 2)
 set (deb_example_VERSION_PATCH 2)
@@ -12,10 +13,9 @@ set (deb_example_VERSION "${deb_example_VERSION_MAJOR}.${deb_example_VERSION_MIN
 
 
 ############################################################
-# Create a library
+# 创建动态库
 ############################################################
 
-#Generate the shared library from the library sources
 add_library(cmake_examples_deb SHARED src/hello.cc)
 
 target_include_directories(cmake_examples_deb
@@ -23,37 +23,34 @@ target_include_directories(cmake_examples_deb
         ${PROJECT_SOURCE_DIR}/include
 )
 ############################################################
-# Create an executable
+# 创建可执行程序
 ############################################################
 
-# Add an executable with the above sources
 add_executable(cmake_examples_deb_bin src/main.cc)
 
-# link the new hello_library target with the hello_binary target
 target_link_libraries( cmake_examples_deb_bin
     PUBLIC
         cmake_examples_deb
 )
 
 ############################################################
-# Install
+# 安装
 ############################################################
 
-# Binaries
+# 二进制
 install (TARGETS cmake_examples_deb_bin
     DESTINATION bin)
 
-# Library
-# Note: may not work on windows
+# 动态库
 install (TARGETS cmake_examples_deb
     LIBRARY DESTINATION lib)
 
-# Config
+# 配置
 install (FILES cmake-examples.conf
     DESTINATION etc)
 
 ############################################################
-# Create DEB
+# 创建 DEB
 ############################################################
 
 # Tell CPack to generate a .deb package
