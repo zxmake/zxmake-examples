@@ -7,6 +7,19 @@
   * **hermetic_cc_toolchain**: Implemented ARM cross-compilation using the [zig toolchain](https://github.com/uber/hermetic_cc_toolchain)
   * **toolchains_arm_gnu**: ARM cross-compilation using the packaged [toolchain](https://github.com/hexdae/toolchains_arm_gnu)
 
+* **cmake**:
+  * **01-basic**: Basic example of using CMake.
+  * **02-sub-projects**: Example of using sub-projects in CMake.
+  * **03-code-generation**: Example of using code generation (configure files / protobuf) in CMake.
+  * **04-static-analysis**: Example of using static analysis (clang-analyzer / clang-format / cppcheck) in CMake.
+  * **05-unit-testing**: Example of using unit testing (boost_unit_test / catch2 / gtest) in CMake.
+  * **06-installer**: Example of using installer (Deb) in CMake.
+  * **07-cross-build**: Example of using cross-compilation in CMake.
+
+* **xmake**:
+  * **01-basic**: Basic example of using xmake.
+  * **02-cross-build**: Example of using cross-compilation (aarch64-none-linux-gnu / arm-none-linux-gnueabihf / clang-target / g++-aarch64-linux-gnu / llvm14 / muslcc / zig) in xmake.
+
 ## Docker
 
 * ubuntu 22.04

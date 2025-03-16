@@ -26,8 +26,14 @@ SDK_ZIP_FILE="${SCRIPT_DIR}/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-linux-gn
 SDK_DIR="${SCRIPT_DIR}/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-linux-gnueabihf"
 
 if [ -d "${SDK_DIR}" ]; then
-    warning "dir [${SDK_DIR}] exists, remove it"
+    warning "dir [${SDK_DIR}] exists, skip installing"
 else
+    if [ -f "${SDK_ZIP_FILE}" ]; then
+        warning "file [${SDK_ZIP_FILE}] exists. skip downloading"
+    else
+        info "start downloading ndk zip file [${SDK_ZIP_FILE}]"
+        wget "https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-linux-gnueabihf.tar.xz" -O ${SDK_ZIP_FILE}
+    fi
     tar -xf ${SDK_ZIP_FILE} -C "${SCRIPT_DIR}"
 fi
 

@@ -89,7 +89,7 @@ function docker_build() {
     --env DOCKER_GRP=${GRP} \
     --env DOCKER_GRP_ID=${GRP_ID} \
     --env DOCKER_IMG=${DOCKER_IMAGE} \
-    --volume ${PROJECT_BASE_DIR}:/${PROJECT_NAME} \
+    --volume ${PROJECT_BASE_DIR}:/${PROJECT_BASE_DIR} \
     --volume ${HOME}/.gitconfig:${DOCKER_HOME}/.gitconfig \
     --volume ${HOME}/.ssh:${DOCKER_HOME}/.ssh \
     --volume /etc/passwd:/etc/passwd:ro \
@@ -100,7 +100,7 @@ function docker_build() {
     --add-host in_dev_docker:127.0.0.1 \
     --add-host ${LOCAL_HOST}:127.0.0.1 \
     --hostname in_dev_docker \
-    --workdir /${PROJECT_NAME}"
+    --workdir ${PROJECT_BASE_DIR}"
 
 
   info "Starting docker container \"${DOCKER_CONTAINER}\" ..."
