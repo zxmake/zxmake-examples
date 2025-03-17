@@ -1,0 +1,5 @@
+# 添加 c++ 编译参数
+build --cxxopt="-std=c++17"
+
+# Enable Bzlmod for every Bazel command
+common --enable_bzlmod
