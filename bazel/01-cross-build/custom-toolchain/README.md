@@ -56,3 +56,25 @@ bazel build --subcommands //main:hello-world
 bazel clean
 bazel build //main:hello-world
 ```
+
+## Cuda 交叉编译
+
+> 需要下载 Nvidia 的 cuda 交叉编译工具链, 否则会报错 cudart 找不到。
+>
+> <https://developer.download.nvidia.cn/compute/cuda/repos/ubuntu2004/cross-linux-aarch64/>
+
+```bash
+# ubuntu 2004
+cd /tmp
+
+wget https://developer.download.nvidia.cn/compute/cuda/repos/ubuntu2004/cross-linux-aarch64/cuda-driver-cross-aarch64-11-8_11.8.89-1_all.deb
+wget https://developer.download.nvidia.cn/compute/cuda/repos/ubuntu2004/cross-linux-aarch64/cuda-cccl-cross-aarch64-11-8_11.8.89-1_all.deb
+wget https://developer.download.nvidia.cn/compute/cuda/repos/ubuntu2004/cross-linux-aarch64/cuda-cudart-cross-aarch64-11-8_11.8.89-1_all.deb
+
+sudo dpkg -i cuda-driver-cross-aarch64-11-8_11.8.89-1_all.deb
+sudo apt install cuda-driver-cross-aarch64-11-8
+sudo dpkg -i cuda-cccl-cross-aarch64-11-8_11.8.89-1_all.deb
+sudo apt install cuda-cccl-cross-aarch64-11-8
+sudo dpkg -i cuda-cudart-cross-aarch64-11-8_11.8.89-1_all.deb
+sudo apt install cuda-cudart-cross-aarch64-11-8
+```

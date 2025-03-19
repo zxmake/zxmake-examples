@@ -95,6 +95,21 @@ ENV QEMU_LD_PREFIX=/usr/aarch64-linux-gnu
 
 RUN git config --global --add safe.directory '*'
 
+# cuda 交叉编译环境
+# wget https://developer.download.nvidia.cn/compute/cuda/repos/ubuntu2004/cross-linux-aarch64/cuda-driver-cross-aarch64-11-8_11.8.89-1_all.deb
+# wget https://developer.download.nvidia.cn/compute/cuda/repos/ubuntu2004/cross-linux-aarch64/cuda-cccl-cross-aarch64-11-8_11.8.89-1_all.deb
+# wget https://developer.download.nvidia.cn/compute/cuda/repos/ubuntu2004/cross-linux-aarch64/cuda-cudart-cross-aarch64-11-8_11.8.89-1_all.deb
+COPY docker/cuda-cccl-cross-aarch64-11-8_11.8.89-1_all.deb /software/
+COPY docker/cuda-cudart-cross-aarch64-11-8_11.8.89-1_all.deb /software/
+COPY docker/cuda-driver-cross-aarch64-11-8_11.8.89-1_all.deb /software/
+RUN cd /software && \
+    dpkg -i cuda-driver-cross-aarch64-11-8_11.8.89-1_all.deb && \
+    apt install -y cuda-driver-cross-aarch64-11-8 && \
+    dpkg -i cuda-cccl-cross-aarch64-11-8_11.8.89-1_all.deb && \
+    apt install -y cuda-cccl-cross-aarch64-11-8 && \
+    dpkg -i cuda-cudart-cross-aarch64-11-8_11.8.89-1_all.deb && \
+    apt install -y cuda-cudart-cross-aarch64-11-8
+
 ARG USER_NAME=visitor
 RUN useradd -m ${USER_NAME}
 # 免密执行 sudo 权限

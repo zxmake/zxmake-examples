@@ -1,6 +1,7 @@
 .PHONY: build
 build:
-	git lfs pull
+	bash scripts/run_bazel_examples.sh
+	bash scripts/run_cmake_examples.sh
 	bash scripts/run_xmake_examples.sh
 
 .PHONY: docker

@@ -5,8 +5,6 @@ build/
 compile_commands.json
 *MODULE.bazel.lock
 
-/bazel-cross-build/custom-toolchain/bazel-*
-/bazel-cross-build/toolchains_arm_gnu/bazel-*
-/bazel-cuda-target/bazel-*
+bazel-*
 /docker/.ssh
 /docker/.gitconfig

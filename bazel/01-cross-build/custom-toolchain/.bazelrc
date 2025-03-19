@@ -3,3 +3,6 @@ build --cxxopt="-std=c++17"
 
 # Enable Bzlmod for every Bazel command
 common --enable_bzlmod
+
+# cuda 参数
+build --@rules_cuda//cuda:copts=--use_fast_math
