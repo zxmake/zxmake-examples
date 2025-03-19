@@ -1,5 +1,6 @@
 .PHONY: build
 build:
+	bash scripts/run_bazel_examples.sh
 	bash scripts/run_cmake_examples.sh
 	bash scripts/run_xmake_examples.sh
 
