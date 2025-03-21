@@ -32,8 +32,9 @@ bazel build --platforms=//custom/platform:cortex_m3 //custom:binary
 # 需要非 root 权限, 没法在 github action 里跑
 if [ -z "${GITHUB_ACTIONS+x}" ]; then
     info "not running in github actions"
-    # 交叉编译生成 compile_commands.json 会卡住, 暂时不生成
+    # 交叉编译生成 compile_commands.json 会卡住, 暂时改成用 xmake 生成 host 的编译命令
     # time bazel run @hedron_compile_commands//:refresh_all
+    xmake build --yes --rebuild --verbose --all
 else
     info "running in github actions, skip generating compile_commands.json"
 fi
