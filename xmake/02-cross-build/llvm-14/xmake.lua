@@ -14,7 +14,7 @@ add_requires("llvm 14.0.0", {alias = "llvm-14", system = true})
 -- 3.12.3 版本会一直报错安装不了
 add_requireconfs("**.python", {override = true, version = "3.11.8"})
 
-target("xmake.02-cross-build.llvm-14.main", function()
+target("cc_main", function()
     set_kind("binary")
     add_files("src/main.cc")
     set_toolchains("llvm@llvm-14")

@@ -23,6 +23,6 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "${SCRIPT_DIR}"
 
 xmake config --yes
-xmake build --yes --verbose
+xmake build --yes --verbose --all
 
 cd -

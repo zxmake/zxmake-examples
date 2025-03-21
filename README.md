@@ -2,10 +2,18 @@
 
 ## Examples
 
-* **bazel-cross-build**:
-  * **custom-toolchain**: Cross-compilation implemented with a custom toolchain.
-  * **hermetic_cc_toolchain**: Implemented ARM cross-compilation using the [zig toolchain](https://github.com/uber/hermetic_cc_toolchain)
-  * **toolchains_arm_gnu**: ARM cross-compilation using the packaged [toolchain](https://github.com/hexdae/toolchains_arm_gnu)
+* **bazel**:
+  * **01-cross-build**:
+    * **custom-toolchain**: Cross-compilation implemented with a custom toolchain.
+    * **hermetic_cc_toolchain**: Implemented ARM cross-compilation using the [zig toolchain](https://github.com/uber/hermetic_cc_toolchain)
+    * **toolchains_arm_gnu**: ARM cross-compilation using the packaged [toolchain](https://github.com/hexdae/toolchains_arm_gnu)
+  * **02-cuda-target**:
+    * **basic**: Basic example of using CUDA in Bazel.
+    * **basic-macros**: Basic example of using CUDA in Bazel with macros.
+    * **cublas**: Example of using cuBLAS in Bazel.
+    * **if-cuda**: Example of using conditional compilation in Bazel with CUDA.
+    * **rdc**: Example of using RDC in Bazel.
+    * **thrust**: Example of using Thrust in Bazel.
 
 * **cmake**:
   * **01-basic**: Basic example of using CMake.
@@ -23,11 +31,14 @@
 ## Docker
 
 * ubuntu 22.04
+* cuda 11.8
 * bazel v8.1.1
 * xmake v3.0.5
 * cmake 3.22.1
 * clang 14.0.6
 * gcc 9.5.0
+* zig 0.14.0
+* cuda cross build environment
 
 ```bash
 # Build and Run the Docker container
