@@ -17,7 +17,7 @@ arm_none_eabi_toolchain(
     ],
     target_compatible_with = [
         "@platforms//os:none",
-        "//examples/custom/cpu:cortex_m3",
+        "//custom/cpu:cortex_m3",
     ],
 )
 
@@ -40,6 +40,6 @@ arm_none_eabi_toolchain(
     ],
     target_compatible_with = [
         "@platforms//os:none",
-        "//examples/custom/cpu:cortex_m4",
+        "//custom/cpu:cortex_m4",
     ],
 )

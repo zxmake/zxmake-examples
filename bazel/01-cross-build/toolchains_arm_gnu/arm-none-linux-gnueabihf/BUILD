@@ -1,10 +1,12 @@
+# project/BUILD.bazel
+
 load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
 
 platform(
-    name = "arm_none_eabi",
+    name = "arm_linux_gnueabihf",
     constraint_values = [
         "@platforms//cpu:arm",
-        "@platforms//os:none",
+        "@platforms//os:linux",
     ],
 )
 
@@ -19,21 +21,16 @@ cc_library(
     includes = ["includes"],
     target_compatible_with = [
         "@platforms//cpu:arm",
-        "@platforms//os:none",
+        "@platforms//os:linux",
     ],
 )
 
-# bazel build --platforms=//examples/arm-none:arm_none_eabi //examples/arm-none:arm_elf
 cc_binary(
     name = "arm_elf",
     srcs = ["main.cc"],
     copts = [
         "-mcpu=cortex-a5",
         "-mthumb",
-    ],
-    linkopts = [
-        "-nostartfiles",
-        "-Wl,--entry,main",
     ],
     deps = [":arm_library"],
 )

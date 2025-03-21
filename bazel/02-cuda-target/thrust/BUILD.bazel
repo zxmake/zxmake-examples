@@ -8,7 +8,7 @@ cuda_library(
     deps = ["@local_cuda//:thrust"],
 )
 
-# Run with 'bazel run //examples/thrust:main'
+# Run with 'bazel run //thrust:main'
 # buildifier: disable=native-cc-binary
 cc_binary(
     name = "main",
