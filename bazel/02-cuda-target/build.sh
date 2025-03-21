@@ -22,7 +22,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 cd "${SCRIPT_DIR}"
 
-bazel build //basic-macros/...
+bazel build //...
 
 # 生成 compile_commands.json
 # 需要非 root 权限, 没法在 github action 里跑
