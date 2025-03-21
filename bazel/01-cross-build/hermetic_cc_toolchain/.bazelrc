@@ -1,0 +1,10 @@
+common --enable_platform_specific_config
+
+# 确保在 bazel build 之前创建了相应的目录
+build:linux --sandbox_add_mount_pair=/tmp
+build:macos --sandbox_add_mount_pair=/var/tmp
+build:windows --sandbox_add_mount_pair=C:\Temp
+
+# 如果希望将 Zig 缓存放在不同的位置, 可以设置:
+# build --repo_env=HERMETIC_CC_TOOLCHAIN_CACHE_PREFIX=/path/to/cache
+# build --sandbox_add_mount_pair=/path/to/cache

@@ -78,3 +78,10 @@ sudo apt install cuda-cccl-cross-aarch64-11-8
 sudo dpkg -i cuda-cudart-cross-aarch64-11-8_11.8.89-1_all.deb
 sudo apt install cuda-cudart-cross-aarch64-11-8
 ```
+
+cuda 交叉编译最核心的步骤在于修改了 `-ccbin=/usr/bin/aarch64-linux-gnu-gcc` 参数。
+
+```bash
+# 举个例子
+nvcc -c -I. -I/usr/local/cuda/include --std c++17 -I/opt/toolchain/orin/include -I/opt/toolchain/orin/cuda-11.4/targets/aarch64-linux/include -I/opt/toolchain/orin/include/aarch64-linux-gnu --use_fast_math -Xcompiler -g0 -DNDEBUG -Xcompiler -ffunction-sections -Xcompiler -fdata-sections -Xcompiler -fPIC --expt-relaxed-constexpr --extended-lambda -m64 -ccbin=/usr/bin/aarch64-linux-gnu-gcc -gencode arch=compute_60,code=compute_60 -gencode arch=compute_60,code=[sm_60,sm_61,sm_62] -gencode arch=compute_70,code=compute_70 -gencode arch=compute_70,code=[sm_70,sm_72,sm_75] -gencode arch=compute_80,code=compute_80 -gencode arch=compute_80,code=[sm_80,sm_86,sm_87] -o upsampling_plugin.cu.o upsampling_plugin.cu
+```
