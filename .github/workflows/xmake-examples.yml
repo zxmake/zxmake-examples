@@ -44,6 +44,17 @@ jobs:
           tar xf zig-linux.tar.xz
           mv zig-linux-$(uname -m)-${ZIG_VER}/ /opt/zig
 
+      - name: Build Cuda Cross Build Environment
+        run: |
+          cp docker/bazel-8.1.1-linux-x86_64 /usr/local/bin/bazel
+          cd docker
+          dpkg -i cuda-driver-cross-aarch64-11-8_11.8.89-1_all.deb
+          apt install -y cuda-driver-cross-aarch64-11-8
+          dpkg -i cuda-cccl-cross-aarch64-11-8_11.8.89-1_all.deb
+          apt install -y cuda-cccl-cross-aarch64-11-8
+          dpkg -i cuda-cudart-cross-aarch64-11-8_11.8.89-1_all.deb
+          apt install -y cuda-cudart-cross-aarch64-11-8
+
       - name: Print Current Path
         run: pwd
 
