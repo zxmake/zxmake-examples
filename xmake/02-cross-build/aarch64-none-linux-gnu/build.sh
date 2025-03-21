@@ -39,6 +39,6 @@ fi
 
 # --sdk 必须用绝对路径否则 xmake 会报错找不到 aarch64-none-linux-gnu-g++ 等二进制
 xmake f --yes -p cross --sdk="${SDK_DIR}" --cross=aarch64-none-linux-gnu-
-xmake b --verbose --rebuild xmake.02-cross-build.aarch64-none-linux-gnu.main
+xmake b --verbose --rebuild --all
 
 cd -
