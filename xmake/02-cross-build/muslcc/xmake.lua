@@ -12,7 +12,7 @@ set_toolchains("@muslcc")
 
 add_requires("zlib", "libogg", {system = false})
 
-target("test", function()
+target("main", function()
     set_kind("binary")
     add_files("src/*.c")
     add_packages("zlib", "libogg")

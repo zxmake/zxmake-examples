@@ -27,6 +27,6 @@ cd "${SCRIPT_DIR}"
 # --diagnosis: 调试信息
 # --arch=armv8-a: 指定 arch, 这样产出物就会在 build/linux/armv8-a/release 目录下, 不会放在 build/linux/x86_64 下迷惑人
 xmake f --yes --toolchain=aarch64-clang --arch=armv8-a
-xmake b --yes --verbose --diagnosis --rebuild xmake.02-cross-build.clang-sysroot-target.main
+xmake b --yes --verbose --diagnosis --rebuild --all
 
 cd -
