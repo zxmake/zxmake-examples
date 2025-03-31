@@ -21,7 +21,8 @@ jobs:
             cmake make clang libboost-all-dev ninja-build cppcheck clang-tools \
             clang-format protobuf-compiler \
             g++-aarch64-linux-gnu \
-            qemu-user-static
+            qemu-user-static \
+            wget
 
       - uses: actions/checkout@v4
         with:
@@ -30,6 +31,23 @@ jobs:
 
       - name: Print Current Path
         run: pwd
+
+      - name: Build Cuda Cross Build Environment
+        run: |
+          cp docker/bazel-8.1.1-linux-x86_64 /usr/local/bin/bazel
+          cd docker
+          dpkg -i cuda-driver-cross-aarch64-11-8_11.8.89-1_all.deb
+          apt install -y cuda-driver-cross-aarch64-11-8
+          dpkg -i cuda-cccl-cross-aarch64-11-8_11.8.89-1_all.deb
+          apt install -y cuda-cccl-cross-aarch64-11-8
+          dpkg -i cuda-cudart-cross-aarch64-11-8_11.8.89-1_all.deb
+          apt install -y cuda-cudart-cross-aarch64-11-8
+
+          wget https://developer.download.nvidia.com/compute/cuda/11.8.0/local_installers/cuda-repo-cross-aarch64-ubuntu2004-11-8-local_11.8.0-1_all.deb
+          dpkg -i cuda-repo-cross-aarch64-ubuntu2004-11-8-local_11.8.0-1_all.deb
+          cp /var/cuda-repo-cross-aarch64-ubuntu2004-11-8-local/cuda-*-keyring.gpg /usr/share/keyrings/
+          sudo apt-get update
+          sudo apt-get -y install cuda-cross-aarch64
 
       - name: Run CMake Examples
         env:

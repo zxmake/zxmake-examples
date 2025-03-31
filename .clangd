@@ -1,2 +1,2 @@
 CompileFlags:
-  Remove: [-rdc=true]
+  Remove: [-rdc=true, --generate-code=*, --use_fast_math, -forward-unknown-to-host-compiler, -ccbin=*]
