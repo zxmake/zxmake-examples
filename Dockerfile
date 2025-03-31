@@ -108,7 +108,16 @@ RUN cd /software && \
     dpkg -i cuda-cccl-cross-aarch64-11-8_11.8.89-1_all.deb && \
     apt install -y cuda-cccl-cross-aarch64-11-8 && \
     dpkg -i cuda-cudart-cross-aarch64-11-8_11.8.89-1_all.deb && \
-    apt install -y cuda-cudart-cross-aarch64-11-8
+    apt install -y cuda-cudart-cross-aarch64-11-8 \
+    && cd / && rm -r software
+
+RUN mkdir /software && cd /software \
+    && wget https://developer.download.nvidia.com/compute/cuda/11.8.0/local_installers/cuda-repo-cross-aarch64-ubuntu2004-11-8-local_11.8.0-1_all.deb \
+    && sudo dpkg -i cuda-repo-cross-aarch64-ubuntu2004-11-8-local_11.8.0-1_all.deb \
+    && sudo cp /var/cuda-repo-cross-aarch64-ubuntu2004-11-8-local/cuda-*-keyring.gpg /usr/share/keyrings/ \
+    && sudo apt-get update \
+    && sudo apt-get -y install cuda-cross-aarch64 \
+    && cd / && rm -r software
 
 ARG USER_NAME=visitor
 RUN useradd -m ${USER_NAME}
